@@ -43,8 +43,9 @@ import colorScheme from '../../config/colors';
 import { createPortCallMessageAsObject, objectToXml } from '../../util/xmlUtils';
 import { cleanURN } from '../../util/stringUtils';
 import { getDateTimeString } from '../../util/timeservices';
-import { hasComment, promptOpposite } from '../../config/instances';
 
+
+import { hasComment, promptOpposite } from '../../config/instances';
 
 let navBackTimer      = null;
 let initRedirectTimer = null;
