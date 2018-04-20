@@ -12,6 +12,7 @@ node_modules/
 .expo-source/
 npm-debug.*
 *.apk
+android/gradle
 android/.gradle
 android/.idea
 ios/.DS_Store
@@ -28,7 +29,7 @@ ios/portablecdm/Supporting/EXBuildConstants.plist.bak
 .DS_Store
 *.pbxuser
 !default.pbxuser
-*.mode1v3
+*.mode1v3nn
 !default.mode1v3
 *.mode2v3
 !default.mode2v3
@@ -130,3 +131,4 @@ ios/RCTTest.podspec
 ios/Podfile.lock
 ios/Pods
 .expo
+../.expo
