@@ -130,3 +130,4 @@ ios/RCTTest.podspec
 ios/Podfile.lock
 ios/Pods
 .expo
+ubuntu_start.sh
