@@ -132,3 +132,4 @@ ios/Podfile.lock
 ios/Pods
 .expo
 ../.expo
+ubuntu_start.sh
