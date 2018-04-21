@@ -123,3 +123,6 @@ ios/Pods
 .expo
 
 *.sh
+
+App/android/android.iml
+App/android/app/
