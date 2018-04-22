@@ -63,9 +63,13 @@ DerivedData
 /android/versioned-react-native/local.properties
 /android/versioned-react-native/ReactAndroid
 android/android.iml
+android/app/build.gradle
 android/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java
 android/build.gradle
 android/detach-scripts/prepare-detached-build.sh
+android/gradlew
+android/gradlew.bat
+										
 
 ReactAndroid-temp.aar
 *.apk
