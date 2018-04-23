@@ -146,6 +146,8 @@ class PortCallList extends Component {
                                     onPress={() => {
                                         console.log(JSON.stringify(portCall.vessel));
                                         selectPortCall(portCall);
+                                        this.props.toggleFavoriteVessel(portCall.vessel.imo);
+                                        this.props.updatePortCalls();
                                         navigate('TimeLine')
                                     }}
                                     onLongPress={() => {
