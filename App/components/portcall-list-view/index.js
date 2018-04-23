@@ -144,7 +144,7 @@ class PortCallList extends Component {
                                     // rightTitle={portCall.stage ? portCall.stage.replace(/_/g, ' ') : undefined}
                                     // rightTitleStyle={[styles.subTitleStyle, {fontSize: 9}]}
                                     onPress={() => {
-                                        //console.log(JSON.stringify(portCall.vessel));
+                                        console.log(JSON.stringify(portCall.vessel));
                                         selectPortCall(portCall);
                                         navigate('TimeLine')
                                     }}
@@ -180,7 +180,7 @@ class PortCallList extends Component {
         );
     }
 
-    renderFavorites(portCall) {
+  renderFavorites(portCall) {
         let showStar = this.props.favoritePortCalls.includes(portCall.portCallId);
         let showBoat = this.props.favoriteVessels.includes(portCall.vessel.imo);
         return (
@@ -199,7 +199,7 @@ class PortCallList extends Component {
                 </View>
         );
     }
-    isFavorite(portCall) {
+  isFavorite(portCall) {
         return this.props.favoritePortCalls.includes(portCall.portCallId) ||
         this.props.favoriteVessels.includes(portCall.vessel.imo);
     }
