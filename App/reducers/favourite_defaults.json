@@ -1,0 +1,13 @@
+[ 
+    "Anchoring_Commenced",
+    "Anchoring_Completed",
+    "AnchoringOp_Requested",
+    "VTSAreaEntry_Requested",
+    "Arrival_Vessel_AnchorageArea",
+    "Arrival_Vessel_Berth",
+    "Arrival_Vessel_PilotBA",
+    "Arrival_Vessel_TrafficArea",
+    "Departure_Vessel_Berth",
+    "Departure_Vessel_AnchorageArea",
+    "Departure_Vessel_TrafficArea"
+]
