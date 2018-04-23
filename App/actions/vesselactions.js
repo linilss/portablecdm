@@ -15,8 +15,7 @@ export const selectVessel = (vessel) => {
  * @param {string} vesselUrn 
  */
 export const fetchVessel = (vesselUrn) => {
-    return (dispatch, getState) => {
-    
+  return (dispatch, getState) => {    
         const connection = getState().settings.connection;
         const token = getState().settings.token;
         const contentType = getState().settings.instance.contentType;
@@ -153,7 +152,7 @@ export const fetchVesselByName = (vesselName) => {
 }
 
 export const appendVesselToPortCall = (portCall) =>  {
-    return (dispatch, getState) => {
+  return (dispatch, getState) => {
         const connection = getState().settings.connection;
         const token = getState().settings.token;
         const favorites = getState().favorites;

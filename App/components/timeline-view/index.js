@@ -50,9 +50,11 @@ class TimeLineView extends Component {
     }
 
   componentWillMount() {
-    console.log("PROPS:");
+    /*
+    console.log("PROPSIIIIIIIIIIIIIIIIIIIII:");
     console.log(this.props);
     console.log("SLUT");
+    */
         portCallId = this.props.portCallId;
         timer = setInterval(() => this.loadOperations, 60000);
 
