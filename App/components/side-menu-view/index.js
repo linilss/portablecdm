@@ -69,7 +69,7 @@ class SideMenu extends Component {
                 {!!vessel &&
                     <Text style={styles.headerText}>{vessel.name}</Text>}
                 {!vessel &&
-                <Text style={styles.headerText}>Select a Portcall</Text>}
+                <Text style={styles.headerText}>Menu</Text>}
             </View>
 
 
@@ -87,7 +87,7 @@ class SideMenu extends Component {
       underlayColor={colorScheme.secondaryColor}
       title={
         <View style={styles.textContainer}>
-        <Text style={textStyle}>Port Call Timeline</Text>
+        <Text style={textStyle}>TimeLine</Text>
         </View>
       }
       onPress={() => {
@@ -95,7 +95,7 @@ class SideMenu extends Component {
           navigate('TimeLine');
       }}
       />
-      
+
 
       <ListItem
       containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
@@ -107,7 +107,7 @@ class SideMenu extends Component {
                         underlayColor={colorScheme.secondaryColor}
                         title={
                             <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select PortCall</Text>
+                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Berth View</Text>
                             </View>
                         }
                         onPress={() => {
@@ -125,7 +125,7 @@ class SideMenu extends Component {
                         underlayColor={colorScheme.secondaryColor}
                         title={
                             <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Berth</Text>
+                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Portcall View</Text>
                             </View>
                         }
                         onPress={() => {
