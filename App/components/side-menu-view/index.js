@@ -95,7 +95,7 @@ class SideMenu extends Component {
           navigate('TimeLine');
       }}
       />
-      
+
 
       <ListItem
       containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
