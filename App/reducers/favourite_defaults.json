@@ -1,0 +1,52 @@
+[ 
+    "Anchoring_Commenced",
+    "Anchoring_Completed",
+
+    "AnchoringOp_Requested",
+    "VTSAreaEntry_Requested",
+
+    "Arrival_Vessel_AnchorageArea",
+    "Arrival_Vessel_Berth",
+    "Arrival_Vessel_TrafficArea",
+    "Arrival_Vessel_PilotBA",
+
+    "Departure_Vessel_AnchorageArea",
+    "Departure_Vessel_Berth",
+    "Departure_Vessel_TrafficArea",
+
+    "ReadyToSailOp_Commenced",
+    "CargoOp_Commenced",
+    "SludgeOp_Commenced",
+    "WaterOp_Commenced",
+
+    "ReadyToSailOp_Completed",
+    "CargoOp_Completed",
+    "SludgeOp_Completed",
+    "WaterOp_Completed",
+
+    "Arrival_Vessel_TugZone",
+    "Departure_Vessel_TugZone",
+    "Pilotage_Requested",
+    "WaterOp_Requested",
+    "Gangway_Requested",
+
+    "Arrival_Tug_Vessel",
+    "Arrival_SludgeVessel_Vessel",
+    "Arrival_SlopVessel_Vessel",
+    "Arrival_FreshWaterVessel_Vessel",  
+
+    "Departure_Tug_Vessel",
+    "Departure_SludgeVessel_Vessel",
+    "Departure_SlopVessel_Vessel",
+    "Departure_FreshWaterVessel_Vessel",
+
+    "Gangway_Confirmed",
+    "PortVisit_Confirmed",
+    "Pilotage_Confirmed",
+    "WaterOp_Confirmed",
+
+    "WaterOp_Denied",
+    "PortVisit_Denied",
+    "Gangway_Denied",
+    "Pilotage_Denied"
+]
