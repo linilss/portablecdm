@@ -81,8 +81,8 @@ class FavoriteOverview extends Component {
         const {navigate} = navigation;
       const {searchTerm} = this.state;
       const favVesselImo = this.props.favoriteVessels[0];
+       /*
       console.log(favVesselImo);
-      /*
       const favoritePortCalls = this.props.portCalls.filter(function(portCall) {
         return portCall.vessel.imo == favVesselImo;
       });
