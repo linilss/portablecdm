@@ -74,7 +74,7 @@ const InitiatePortCallNavigator = StackNavigator({
 const MainNavigator = DrawerNavigator({
     PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
   Berths: { screen: BerthViewNavigator },
-  Favorites: { screen: OverviewNavigator },
+  FavoriteOverview: { screen: OverviewNavigator },
     TimeLine: {screen: TimeLineNavigator},
     FavoriteStatesSideMenu: { screen: StateList },
     FavoriteStatesInit: { screen: InitiatePortCallNavigator },

@@ -87,36 +87,37 @@ class PortCallList extends Component {
       portCalls.splice(0,1);
     }
 
-    return(
-      <View style={styles.container}>
-      <TopHeader title="Port Calls" navigation={this.props.navigation} firstPage/>
-      {/*Render the search/filters header*/}
-      <View style={styles.containerRow}>
-      <SearchBar
-      autoCorrect={false}
-      containerStyle = {styles.searchBarContainer}
-      showLoadingIcon={showLoadingIcon}
-      clearIcon
-      inputStyle = {{backgroundColor: colorScheme.primaryContainerColor}}
-      lightTheme
-      placeholder='Search by name, IMO or MMSI number'
-      placeholderTextColor = {colorScheme.tertiaryTextColor}
-      onChangeText={text => this.setState({searchTerm: text})}
-      textInputRef='textInput'
-      />
-      <Button
-      containerViewStyle={styles.buttonContainer}
-      small
-      icon={{
-        name: 'filter-list',
-        size: 30,
-        color: colorScheme.primaryTextColor,
-        style: styles.iconStyle,
-      }}
-      backgroundColor = {colorScheme.primaryColor}
-      onPress= {() => navigate('FilterMenu')}
-      />
-      </View>
+        return(
+            <View style={styles.container}>
+                <TopHeader title="Welcome, select your vessel" navigation={this.props.navigation} firstPage/>
+                {/*Render the search/filters header*/}
+                <View style={styles.containerRow}>
+                    <SearchBar
+                        autoCorrect={false}
+                        containerStyle = {styles.searchBarContainer}
+                        showLoadingIcon={showLoadingIcon}
+                        clearIcon
+                        inputStyle = {{backgroundColor: colorScheme.primaryContainerColor}}
+                        lightTheme
+                        placeholder='Search by name, IMO or MMSI number'
+                        placeholderTextColor = {colorScheme.tertiaryTextColor}
+                        onChangeText={text => this.setState({searchTerm: text})}
+                        textInputRef='textInput'
+                    />
+                    <Button
+                        containerViewStyle={styles.buttonContainer}
+                        small
+                        icon={{
+                            name: 'filter-list',
+                            size: 30,
+                            color: colorScheme.primaryTextColor,
+                            style: styles.iconStyle,
+                        }}
+                        backgroundColor = {colorScheme.primaryColor}
+                        onPress= {() => navigate('FilterMenu')}
+                    />
+                </View>
+
 
       {/*Render the List of PortCalls*/}
       <ScrollView
@@ -131,6 +132,7 @@ class PortCallList extends Component {
       >
       <List>
       {
+
 
         this.search(portCalls, searchTerm).map( (portCall) => (
           <ListItem

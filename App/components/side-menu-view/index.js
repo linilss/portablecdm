@@ -78,8 +78,27 @@ class SideMenu extends Component {
             <View style={styles.listContainer}>
                 <List style={{paddingTop: 0, backgroundColor: colorScheme.sidebarColor}}>
                     {/* Menu */}
-                    <ListItem
-                        containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      <ListItem
+      containerStyle={activeItemKey === 'TimeLine' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      leftIcon={{
+        name:'timeline',
+        color: 'white'}}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={textStyle}>Port Call Timeline</Text>
+        </View>
+      }
+      onPress={() => {
+        if (haveSelectedPortCall && activeItemKey !== 'TimeLine')
+          navigate('TimeLine');
+      }}
+      />
+      
+
+      <ListItem
+      containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
                         leftIcon={{
                           name:'home',
                           color: 'white',
@@ -94,7 +113,7 @@ class SideMenu extends Component {
                         onPress={() => {
                             if(activeItemKey !== 'Login') navigate('PortCalls')}
                         }
-                    />
+      />
 
       <ListItem
       containerStyle={activeItemKey === 'Berths' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
@@ -114,6 +133,7 @@ class SideMenu extends Component {
       }}
       />
 
+
       <ListItem
       containerStyle={activeItemKey === 'FavoriteOverview' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
       leftIcon={{
@@ -132,71 +152,12 @@ class SideMenu extends Component {
       }}
       />
 
-      {true &&<ListItem
-        containerStyle={activeItemKey === 'FavoriteStatesSideMenu' /* TODO: Change color when selected */ ? [containerStyle, styles.selectedContainer] : containerStyle}
-                          leftIcon={{
-                          name: 'add',
-                          color: 'white'
-                        }}
-                        hideChevron
-                        underlayColor={colorScheme.secondaryColor}
-                        title={
-                            <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Create new port call</Text>
-                            </View>
-                        }
-                        onPress={() => {
-                            if (activeItemKey !== 'StateList') {
-                                // Only to pass params to the children of the stack navigator
-                                navigate('FavoriteStatesInit', {}, {
-                                    type: "Navigation/NAVIGATE",
-                                    routeName: "FavoriteStatesInit",
-                                    params: { initNew: true }
-                                  });
-                            }
-                        }}
-                    />}
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'FavoriteStatesSideMenu' ? [containerStyle, styles.selectedContainer] : containerStyle}
-                          leftIcon={{
-                          name: 'access-time',
-                          color: 'white'
-                        }}
-                        hideChevron
-                        underlayColor={colorScheme.secondaryColor}
-                        title={
-                            <View style={styles.textContainer}>
-                                <Text style={textStyle}>Report TimeStamp</Text>
-                            </View>
-                        }
-                        onPress={() => {
-                            if (haveSelectedPortCall && activeItemKey !== 'StateList')
-                                navigate('FavoriteStatesSideMenu');
-                        }}
-                    />
-
-      <ListItem
-      containerStyle={activeItemKey === 'TimeLine' ? [containerStyle, styles.selectedContainer] : containerStyle}
-      leftIcon={{
-        name:'timeline',
-        color: 'white'}}
-      hideChevron
-      underlayColor={colorScheme.secondaryColor}
-      title={
-        <View style={styles.textContainer}>
-        <Text style={textStyle}>Port Call Timeline</Text>
-        </View>
-      }
-      onPress={() => {
-        if (haveSelectedPortCall && activeItemKey !== 'TimeLine')
-          navigate('TimeLine');
-      }}
-      />
 
       <ListItem
       containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
       leftIcon={{
+
                           name:'directions-boat',
                           color: 'white'}}
                         hideChevron
@@ -214,12 +175,19 @@ class SideMenu extends Component {
 
       <ListItem
       containerStyle={activeItemKey === 'Settings' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+
+
+
+
+
+
+
       leftIcon={{
         name:'settings',
         color: 'white',
       }}
                         hideChevron
-                        underlayColor={colorScheme.secondaryColor}
+                        underlayColor={colorScheme.secondaryColor}pp
                         title={
                             <View style={styles.textContainer}>
                                 <Text style={canBeAccessedEverywhereExceptOnLogin} >Settings</Text>
