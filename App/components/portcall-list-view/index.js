@@ -148,6 +148,8 @@ class PortCallList extends Component {
           // rightTitleStyle={[styles.subTitleStyle, {fontSize: 9}]}
           onPress={() => {
             //console.log(JSON.stringify(portCall.vessel));
+            this.props.toggleFavoriteVessel(portCall.vessel.imo);
+            this.props.updatePortCalls();
             selectPortCall(portCall);
             navigate('TimeLine')
           }}
