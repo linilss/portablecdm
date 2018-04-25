@@ -59,7 +59,7 @@ ReactAndroid-temp.aar
 /android/android/
 /android/maven/
 /node_modules/react-native-pinch/android/build.gradle
-/App/components/send-portcall-view/index.js
+
 
 android/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java
 
