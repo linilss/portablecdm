@@ -6,6 +6,7 @@ import LoginView            from '../components/login-view';
 import SendPortCall         from '../components/send-portcall-view';
 import StateList            from '../components/state-list-view';
 import TimeLineView         from '../components/timeline-view';
+import EtaView              from '../components/eta-view';
 import PortCallList         from '../components/portcall-list-view';
 import FilterMenu           from '../components/portcall-list-view/sections/filterMenu';
 import StateDetails         from '../components/timeline-view/sections/statedetails';
@@ -45,6 +46,15 @@ const PortCallListNavigator = StackNavigator({
   headerMode: 'none',
 });
 
+
+const EtaNavigator = StackNavigator({
+  EtaView: {screen: EtaView},
+
+}, {
+  headerMode: 'none',
+});
+
+
 const SettingsNavigator = StackNavigator({
   SettingsStart: { screen: Settings },
   VesselLists: { screen: VesselLists},
@@ -64,7 +74,8 @@ const InitiatePortCallNavigator = StackNavigator({
 const MainNavigator = DrawerNavigator({
     PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
     Berths: { screen: BerthViewNavigator },
-    TimeLine: {screen: TimeLineNavigator},
+  TimeLine: {screen: TimeLineNavigator},
+  EtaView: { screen: EtaNavigator },
     FavoriteStatesSideMenu: { screen: StateList },
     FavoriteStatesInit: { screen: InitiatePortCallNavigator },
     VesselInfo: { screen: VesselInfo },
