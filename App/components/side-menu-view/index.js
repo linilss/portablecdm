@@ -115,27 +115,44 @@ class SideMenu extends Component {
                         }
                     />
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'Berths' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
-                        leftIcon={{
-                            name: 'home',
-                            color: 'white'
-                        }}
-                        hideChevron
-                        underlayColor={colorScheme.secondaryColor}
-                        title={
-                            <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Berth</Text>
-                            </View>
-                        }
-                        onPress={() => {
-                            if(activeItemKey !== 'Login') navigate('Berths');
-                        }}
-                    />
+      <ListItem
+      containerStyle={activeItemKey === 'Berths' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      leftIcon={{
+        name: 'home',
+        color: 'white'
+      }}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Berth</Text>
+        </View>
+      }
+      onPress={() => {
+        if(activeItemKey !== 'Login') navigate('Berths');
+      }}
+      />
+      <ListItem
+      containerStyle={activeItemKey === 'EtaView' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      leftIcon={{
+        name: 'home',
+        color: 'white'
+      }}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={canBeAccessedEverywhereExceptOnLogin}>ETA view</Text>
+        </View>
+      }
+      onPress={() => {
+        if(activeItemKey !== 'Login') navigate('EtaView');
+      }}
+      />
 
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      <ListItem
+      containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
                         leftIcon={{
                           name:'directions-boat',
                           color: 'white'}}
