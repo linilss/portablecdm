@@ -38,40 +38,161 @@ const portCallId = null;
 class EtaView extends Component {
     constructor(props) {
         super(props);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        
+        this.state = {
+            dataSource: ds.cloneWithRows(['row 1, row 2']),
+            refreshing: false,
+            showExpiredStates: false,
+        }
+
+        this.goToStateList = this.goToStateList.bind(this);
     }
 
   componentWillMount() {
+    /*
+    console.log("PROPSIIIIIIIIIIIIIIIIIIIII:");
+    console.log(this.props);
+    console.log("SLUT");
+    */
         portCallId = this.props.portCallId;
         timer = setInterval(() => this.loadOperations, 60000);
 
-
+        this.loadOperations = this.loadOperations.bind(this);
         if (!!portCallId)
             this.loadOperations();
+    }
+
+    loadOperations() {
+        this.props.fetchPortCallEvents(portCallId).then(() => {
+            if(this.props.error.hasError) {
+                if(this.props.error.error.title == "RELIABILITY_FAIL") {
+                    Alert.alert(
+                        'Unable to fetch reliabilities!',
+                        'It can easily be turned on or off in the settings. Would you like to turn it off now?',
+                        [
+                            {text: 'No', onPress: () => this.props.navigation.navigate('PortCalls'), style: 'cancel'},
+                            {text: 'Yes', onPress: () => {
+                                this.props.changeFetchReliability(false);
+                                this.props.removeError();
+                                this.loadOperations(); //Maybe dangerous?
+                            }}
+                        ],
+                        {cancelable: false},
+                    );
+                } else {
+                    this.props.navigation.navigate('Error');                   
+                }
+            }
+        }); 
     }
 
     componentWillUnmount() {
         clearInterval(timer);
     }
 
+    goToStateList = () => {
+        this.props.navigation.navigate('FavoriteStates');
+    }
+
     render() {
+        const { loading, operations, vesselName } = this.props;
+        const {params} = this.props.navigation.state;
+        let { dataSource } = this.state;
+
+        if(!loading) dataSource = dataSource.cloneWithRows(operations);
+
         return(
             <View style={{flex: 1, backgroundColor: colorScheme.primaryContainerColor}}>
-            <TopHeader 
-          title = 'ETA view' 
-          firstPage
-          navigation={this.props.navigation} 
-          rightIconFunction={this.goToStateList}
-            />
-            <View 
-          style={styles.headerContainer}
-            >
-            <Text style={styles.headerText}>HEJ</Text>
-            </View>
+                <TopHeader 
+                    title = 'ETA View' 
+                    firstPage
+                    navigation={this.props.navigation} 
+                    rightIconFunction={this.goToStateList}
+                    leftIcons={this.createFavoriteIcons()}
+                    selectorIcon={this.createShowHideExpiredIcon()}/>
+                <View 
+                    style={styles.headerContainer}
+                >
+                    <Text style={styles.headerText}>{vesselName}</Text>
+                    {operations.reliability >= 0 && 
+                        <Text style={styles.headerTitleText}><Text style={{fontWeight: 'bold'}}>Reliability: </Text>{operations.reliability}%</Text>
+                    }
+                </View>
+
+                {loading && <ActivityIndicator 
+                                color={colorScheme.primaryColor}
+                                style={{alignSelf: 'center'}}
+                                animating={loading}
+                                size='large'/>}
+            <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
+                {!loading && <ListView
+                                enableEmptySections
+                                dataSource={dataSource} 
+                                refreshControl = {
+                                    <RefreshControl
+                                        refreshing={this.state.refreshing}
+                                        onRefresh={this.loadOperations.bind(this)}
+                                    />
+                                }
+                                renderRow={(data, sectionId, rowId) => {
+                                    if (!this.state.showExpiredStates && data.isExpired) {
+                                        return null;
+                                    }
+                                    if (data.isExpired) {
+                                        let expiredMessage = 'This event has expired.';
+                                        if (!data.warnings.some(w => w.message === expiredMessage)) {
+                                            data.warnings.push({message: expiredMessage});
+                                        }
+                                    }
+                                    if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
+                                    return <OperationView 
+                                        operation={data}
+                                        rowNumber={rowId}
+                                        navigation={this.props.navigation}
+                                        vesselName={vesselName}
+                                        />
+                                    }                
+                                }
+                            />
+                }
+            </ScrollView>
             </View>
         );
     }
 
+    createShowHideExpiredIcon() {
+        return {
+            name: this.state.showExpiredStates ? 'remove-red-eye' : 'visibility-off',
+            color: 'white',
+            onPress: () => this.setState({showExpiredStates: !this.state.showExpiredStates}),
+        };
+    }
     
+    createFavoriteIcons() {
+
+        const { portCallId, imo } = this.props;
+
+        let showStar = this.props.favoritePortCalls.includes(portCallId);
+        let showBoat = this.props.favoriteVessels.includes(imo);
+
+        return {
+            first: {
+                name: 'star',
+                color: showStar ? 'gold' : 'gray',
+                onPress: () => {
+                    this.props.toggleFavoritePortCall(portCallId);
+                }
+            },
+            second: {
+                name: 'directions-boat',
+                color: showBoat ? 'lightblue' : 'gray',
+                onPress: () => {
+                    this.props.toggleFavoriteVessel(imo);
+                }
+            }
+        }
+    } 
 }
 
 
@@ -95,7 +216,28 @@ const styles = StyleSheet.create ({
 });
 
 
-export default EtaView;
+
+function mapStateToProps(state) {
+    return {
+        loading: state.portCalls.selectedPortCallIsLoading,
+        operations: state.portCalls.selectedPortCallOperations,
+        vesselName: state.portCalls.vessel.name,
+        imo: state.portCalls.vessel.imo,
+        portCallId: state.portCalls.selectedPortCall.portCallId,
+        favoritePortCalls: state.favorites.portCalls,
+        favoriteVessels: state.favorites.vessels,
+        error: state.error,
+        fetchReliability: state.settings.fetchReliability,
+    };
+}
+
+export default connect(mapStateToProps, {
+    changeFetchReliability, 
+    fetchPortCallEvents, 
+    removeError,
+    toggleFavoritePortCall,
+    toggleFavoriteVessel,
+})(EtaView);
 
 
 
