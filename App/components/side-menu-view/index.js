@@ -18,10 +18,10 @@ import {
     Icon,
     Avatar,
 } from 'react-native-elements';
-
+import ships from '../../assets/ships';
 import colorScheme from '../../config/colors';
 import consts from '../../config/constants';
-import { changeUser, logoutKeycloak, initiatePortCall, } from '../../actions';
+import { changeUser, logoutKeycloak, initiatePortCall, fetchVesselFromIMO  } from '../../actions';
 
 class SideMenu extends Component {
 
@@ -30,9 +30,16 @@ class SideMenu extends Component {
 
     this._logout = this._logout.bind(this);
   }
+  async componentWillMount() {
+    console.log("TJATJA");
+    await this.props.fetchVesselFromIMO(this.props.favoriteVessels[0].split('IMO:')[1])
+      .then(res => console.log(res));
+    console.log(this.props);
+  }
+
 
   _logout() {
-      const { navigation, connection, changeUser, logoutKeycloak } = this.props;
+      const { navigation, connection, changeUser, logoutKeycloak, fetchVesselFromIMO } = this.props;
       if(!!connection.username) {
         changeUser('', '', false);
         console.log('Logging out legacy user...');
@@ -47,10 +54,14 @@ class SideMenu extends Component {
   render() {
 
     const { navigate, state } = this.props.navigation;
-    const { selectedPortCall, vessel, activeItemKey } = this.props;
+    const { selectedPortCall, activeItemKey } = this.props;
+    const vessel = this.props.extendedVessel;
 
-    const haveSelectedPortCall = !!selectedPortCall;
-    const containerStyle = haveSelectedPortCall ? styles.menuContainer : [styles.menuContainer, styles.unavailableContainer];
+    //console.log(this.props);
+    //const vessel2 = fetchVesselFromIMO(this.props.favoriteVessels[0].split(":").slice(-1)[0]);
+    //console.log(vessel2);
+      const haveSelectedPortCall = !!selectedPortCall;
+      const containerStyle = haveSelectedPortCall ? styles.menuContainer : [styles.menuContainer, styles.unavailableContainer];
     const textStyle = haveSelectedPortCall && activeItemKey !== 'Login' ? styles.menuText : [styles.menuText, styles.unavailableMenuText];
     const canBeAccessedEverywhereExceptOnLogin = activeItemKey === 'Login' ? [styles.menuText, styles.unavailableMenuText] : styles.menuText;
     return(
@@ -299,10 +310,17 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        selectedPortCall: state.portCalls.selectedPortCall,
-        vessel: state.portCalls.vessel,
-        connection: state.settings.connection,
+      selectedPortCall: state.portCalls.selectedPortCall,
+      vessel: state.portCalls.vessel,
+      connection: state.settings.connection,
+      favoriteVessels: state.favorites.vessels,
+      extendedVessel: state.vessel.vessel,
     }
 }
 
-export default connect(mapStateToProps, {initiatePortCall, changeUser, logoutKeycloak})(SideMenu);
+export default connect(mapStateToProps, {
+  initiatePortCall,
+  changeUser,
+  logoutKeycloak,
+  fetchVesselFromIMO
+})(SideMenu);
