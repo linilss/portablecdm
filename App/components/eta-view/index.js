@@ -50,11 +50,9 @@ class EtaView extends Component {
     }
 
   componentWillMount() {
-    /*
-    console.log("PROPSIIIIIIIIIIIIIIIIIIIII:");
+    
     console.log(this.props);
-    console.log("SLUT");
-    */
+
         portCallId = this.props.portCallId;
         timer = setInterval(() => this.loadOperations, 60000);
 
@@ -92,7 +90,7 @@ class EtaView extends Component {
     }
 
     goToStateList = () => {
-        this.props.navigation.navigate('FavoriteStates');
+        this.props.navigation.navigate('FavoriteStates'); //LÄGG TILL FUNKTIONEN SOM PEKAR TILL K8 HÄR
     }
 
     render() {
@@ -109,7 +107,6 @@ class EtaView extends Component {
                     firstPage
                     navigation={this.props.navigation} 
                     rightIconFunction={this.goToStateList}
-                    leftIcons={this.createFavoriteIcons()}
                     selectorIcon={this.createShowHideExpiredIcon()}/>
                 <View 
                     style={styles.headerContainer}
@@ -168,31 +165,6 @@ class EtaView extends Component {
             onPress: () => this.setState({showExpiredStates: !this.state.showExpiredStates}),
         };
     }
-    
-    createFavoriteIcons() {
-
-        const { portCallId, imo } = this.props;
-
-        let showStar = this.props.favoritePortCalls.includes(portCallId);
-        let showBoat = this.props.favoriteVessels.includes(imo);
-
-        return {
-            first: {
-                name: 'star',
-                color: showStar ? 'gold' : 'gray',
-                onPress: () => {
-                    this.props.toggleFavoritePortCall(portCallId);
-                }
-            },
-            second: {
-                name: 'directions-boat',
-                color: showBoat ? 'lightblue' : 'gray',
-                onPress: () => {
-                    this.props.toggleFavoriteVessel(imo);
-                }
-            }
-        }
-    } 
 }
 
 
@@ -214,8 +186,6 @@ const styles = StyleSheet.create ({
         fontSize: 12,
    },
 });
-
-
 
 function mapStateToProps(state) {
     return {
