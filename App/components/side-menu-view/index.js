@@ -133,6 +133,31 @@ class SideMenu extends Component {
                         }}
                     />
 
+                       {true &&<ListItem
+                        containerStyle={activeItemKey === 'FavoriteStatesSideMenu' /* TODO: Change color when selected */ ? [containerStyle, styles.selectedContainer] : containerStyle}
+                          leftIcon={{
+                          name: 'add',
+                          color: 'white'
+                        }}
+                        hideChevron
+                        underlayColor={colorScheme.secondaryColor}
+                        title={
+                            <View style={styles.textContainer}>
+                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Create new port call</Text>
+                            </View>
+                        }
+                        onPress={() => {
+                            if (activeItemKey !== 'StateList') {
+                                // Only to pass params to the children of the stack navigator
+                                navigate('FavoriteStatesInit', {}, {
+                                    type: "Navigation/NAVIGATE",
+                                    routeName: "FavoriteStatesInit",
+                                    params: { initNew: true }
+                                  });
+                            }
+                        }}
+                    />}
+
 
                     <ListItem
                         containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
