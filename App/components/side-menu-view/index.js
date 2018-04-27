@@ -95,7 +95,7 @@ class SideMenu extends Component {
           navigate('TimeLine');
       }}
       />
-      
+
 
       <ListItem
       containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
@@ -132,10 +132,8 @@ class SideMenu extends Component {
         if(activeItemKey !== 'Login') navigate('Berths');
       }}
       />
-
-
       <ListItem
-      containerStyle={activeItemKey === 'FavoriteOverview' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      containerStyle={activeItemKey === 'EtaView' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
       leftIcon={{
         name: 'home',
         color: 'white'
@@ -144,20 +142,18 @@ class SideMenu extends Component {
       underlayColor={colorScheme.secondaryColor}
       title={
         <View style={styles.textContainer}>
-        <Text style={canBeAccessedEverywhereExceptOnLogin}>Favorite Overview</Text>
+        <Text style={canBeAccessedEverywhereExceptOnLogin}>ETA view</Text>
         </View>
       }
       onPress={() => {
-        if(activeItemKey !== 'Login') navigate('FavoriteOverview');
+        if(activeItemKey !== 'Login') navigate('EtaView');
       }}
       />
 
 
-
       <ListItem
       containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
-      leftIcon={{
-
+                        leftIcon={{
                           name:'directions-boat',
                           color: 'white'}}
                         hideChevron
