@@ -6,6 +6,7 @@ import LoginView            from '../components/login-view';
 import SendPortCall         from '../components/send-portcall-view';
 import StateList            from '../components/state-list-view';
 import TimeLineView         from '../components/timeline-view';
+import EtaView              from '../components/eta-view';
 import PortCallList         from '../components/portcall-list-view';
 import FavoriteOverview     from '../components/favorite-overview';
 import FilterMenu           from '../components/portcall-list-view/sections/filterMenu';
@@ -55,6 +56,15 @@ const PortCallListNavigator = StackNavigator({
   headerMode: 'none',
 });
 
+
+const EtaNavigator = StackNavigator({
+  EtaView: {screen: EtaView},
+
+}, {
+  headerMode: 'none',
+});
+
+
 const SettingsNavigator = StackNavigator({
   SettingsStart: { screen: Settings },
   VesselLists: { screen: VesselLists},
@@ -72,16 +82,17 @@ const InitiatePortCallNavigator = StackNavigator({
 });
 
 const MainNavigator = DrawerNavigator({
-    PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
-  Berths: { screen: BerthViewNavigator },
+  PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
   FavoriteOverview: { screen: OverviewNavigator },
-    TimeLine: {screen: TimeLineNavigator},
-    FavoriteStatesSideMenu: { screen: StateList },
-    FavoriteStatesInit: { screen: InitiatePortCallNavigator },
-    VesselInfo: { screen: VesselInfo },
-    Settings: { screen: SettingsNavigator },
-    About: { screen: AboutView },
-    Error: { screen: ErrorView },
+  Berths: { screen: BerthViewNavigator },
+  TimeLine: {screen: TimeLineNavigator},
+  EtaView: { screen: EtaNavigator },
+  FavoriteStatesSideMenu: { screen: StateList },
+  FavoriteStatesInit: { screen: InitiatePortCallNavigator },
+  VesselInfo: { screen: VesselInfo },
+  Settings: { screen: SettingsNavigator },
+  About: { screen: AboutView },
+  Error: { screen: ErrorView },
 }, {
     headerMode: 'none',
     drawerWidth: 3*Dimensions.get('window').width/4,
