@@ -240,7 +240,7 @@ class SideMenu extends Component {
         color: 'white',
       }}
                         hideChevron
-                        underlayColor={colorScheme.secondaryColor}pp
+                        underlayColor={colorScheme.secondaryColor}
                         title={
                             <View style={styles.textContainer}>
                                 <Text style={canBeAccessedEverywhereExceptOnLogin} >Settings</Text>
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
 
 })
 
-pp
+
 
 function mapStateToProps(state) {
     return {
