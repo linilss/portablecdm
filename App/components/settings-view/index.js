@@ -106,13 +106,13 @@ class Settings extends Component {
                             );
                         }}
                     />
-                    {false && <Button
+                     <Button
                         backgroundColor={colorScheme.primaryColor}
                         color={colorScheme.primaryTextColor}
                         title="Edit Vessel Lists"
                         buttonStyle={locStyles.buttonStyle}
                         onPress={() => navigate('VesselLists')}
-                    />}
+                    />
                     <View style={styles.containers.info}>
                         <Slider
                             style={locStyles.sliderStyle}

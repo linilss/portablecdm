@@ -30,13 +30,12 @@ export const toggleFavoritePortCall = (portCallId) => {
 
 export const toggleFavoriteVessel = (imo) => {
     return (dispatch, getState) => {
-        if(getState().favorites.vessels.includes(imo)) {
+      if(getState().favorites.vessels.length > 0) {
+        let badIMO = getState().favorites.vessels[0].split(":").slice(-1)[0];
             dispatch({
                 type: types.REMOVE_FAVORITE_VESSEL,
-                payload: imo,
+                payload: badIMO,
             });
-
-            return false;
         }
         dispatch({
             type: types.ADD_FAVORITE_VESSEL,
@@ -46,3 +45,25 @@ export const toggleFavoriteVessel = (imo) => {
         return true;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

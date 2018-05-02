@@ -21,7 +21,7 @@ import {
 import ships from '../../assets/ships';
 
 class VesselInfo extends Component {
-    constructor(props) {
+  constructor(props) {
         super(props);
 
         this.state = {
@@ -33,13 +33,16 @@ class VesselInfo extends Component {
         this.props.fetchVesselFromIMO(this.props.vessel.imo.split('IMO:')[1]).then(() => {
             // DOUBLE EQUALS!! 
             const ship = ships.find(ship => ship.mmsi == this.props.vessel.mmsi.split('MMSI:')[1]);
-            this.setState({extraInfo: ship});
+          this.setState({extraInfo: ship});
+          console.log(this.state.extraInfo);
+          console.log(ship);
         });
     }
 
 
   render(){
     const { extraInfo } = this.state;
+    console.log(extraInfo);
     const { navigate, state } = this.props.navigation;
     const { selectedPortCall, activeItemKey } = this.props;
     const vessel = this.props.extendedVessel ? this.props.extendedVessel : this.props.vessel;
@@ -135,9 +138,9 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        selectedPortCall: state.portCalls.selectedPortCall,
-        vessel: state.portCalls.vessel,
-        extendedVessel: state.vessel.vessel,
+      selectedPortCall: state.portCalls.selectedPortCall,
+      vessel: state.portCalls.vessel,
+      extendedVessel: state.vessel.vessel,
     }
 }
 

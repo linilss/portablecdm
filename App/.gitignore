@@ -43,11 +43,9 @@ DerivedData
 *.iml
 *.gradle
 /android/app/build
-/android/app/build.gradle
 /android/build
 /android/captures
 /android/prod
-/App/android/app/src/main/java/host/exp/exponent/MainActivity.java
 /android/local.properties
 /android/tools/build
 /android/build.gradle
@@ -61,7 +59,9 @@ ReactAndroid-temp.aar
 /android/android/
 /android/maven/
 /node_modules/react-native-pinch/android/build.gradle
-/App/components/send-portcall-view/index.js
+
+
+android/app/src/main/java/host/exp/exponent/generated/DetachBuildConstants.java
 
 
 # Tools
