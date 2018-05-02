@@ -92,7 +92,11 @@ class TimeLineView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-        const {params} = this.props.navigation.state;
+      const {params} = this.props.navigation.state;
+      let portName = "";
+      if(operations[0]) {
+        portName = operations[0].atLocation.name;
+      }
         let { dataSource } = this.state;
 
         if(!loading) dataSource = dataSource.cloneWithRows(operations);
@@ -109,7 +113,7 @@ class TimeLineView extends Component {
                 <View 
                     style={styles.headerContainer}
                 >
-                    <Text style={styles.headerText}>{vesselName}</Text>
+                    <Text style={styles.headerText}>{ portName }</Text>
                     {operations.reliability >= 0 && 
                         <Text style={styles.headerTitleText}><Text style={{fontWeight: 'bold'}}>Reliability: </Text>{operations.reliability}%</Text>
                     }
