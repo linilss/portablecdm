@@ -36,7 +36,8 @@ class PortCallList extends Component {
   state = {
     searchTerm: '',
     refreshing: false,
-    numLoadedPortCalls: 20,
+    numLoadedPortCalls: 1000,
+    vesselsAtm: [],
   }
 
   componentWillMount() {
@@ -86,14 +87,16 @@ class PortCallList extends Component {
     if (portCalls.length === 1) {
       portCalls.splice(0,1);
     }
+    let seen = {};
 
-        return(
-            <View style={styles.container}>
-                <TopHeader title="Welcome, select your vessel" navigation={this.props.navigation} firstPage/>
-                {/*Render the search/filters header*/}
-                <View style={styles.containerRow}>
-                    <SearchBar
-                        autoCorrect={false}
+
+    return(
+      <View style={styles.container}>
+      <TopHeader title="Welcome, select your vessel" navigation={this.props.navigation} firstPage/>
+      {/*Render the search/filters header*/}
+      <View style={styles.containerRow}>
+      <SearchBar
+      autoCorrect={false}
                         containerStyle = {styles.searchBarContainer}
                         showLoadingIcon={showLoadingIcon}
                         clearIcon
@@ -132,9 +135,7 @@ class PortCallList extends Component {
       >
       <List>
       {
-
-
-        this.search(portCalls, searchTerm).map( (portCall) => (
+        this.search(portCalls, searchTerm).filter(function(portCall) { return seen.hasOwnProperty(portCall.vessel.name) ? false : (seen[portCall.vessel.name] = true)}).map( (portCall) => (
           <ListItem
           roundAvatar
           avatar={portCall.vessel.photoURL ? {uri: portCall.vessel.photoURL} : null}
@@ -142,7 +143,6 @@ class PortCallList extends Component {
           title={portCall.vessel.name}
           badge={{element: this.renderFavorites(portCall)}}
           titleStyle={styles.titleStyle}
-          subtitle={getDateTimeString(new Date(portCall.startTime))}
           subtitleStyle={styles.subTitleStyle}
           // rightTitle={portCall.stage ? portCall.stage.replace(/_/g, ' ') : undefined}
           // rightTitleStyle={[styles.subTitleStyle, {fontSize: 9}]}
@@ -151,7 +151,7 @@ class PortCallList extends Component {
             this.props.toggleFavoriteVessel(portCall.vessel.imo);
             this.props.updatePortCalls();
             selectPortCall(portCall);
-            navigate('TimeLine')
+            navigate('VesselInfo')
           }}
           onLongPress={() => {
             Alert.alert(
@@ -198,9 +198,6 @@ class PortCallList extends Component {
         name='directions-boat'
         color='lightblue'
         />}
-      {!!portCall.stage && <Text style={[styles.subTitleStyle, {fontSize: 9, marginLeft: 4}]}>
-        {portCall.stage.replace(/_/g, ' ')}
-        </Text>}
       </View>
     );
   }

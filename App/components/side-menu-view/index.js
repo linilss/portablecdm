@@ -31,10 +31,10 @@ class SideMenu extends Component {
     this._logout = this._logout.bind(this);
   }
   async componentWillMount() {
-    console.log("TJATJA");
+
     await this.props.fetchVesselFromIMO(this.props.favoriteVessels[0].split('IMO:')[1])
       .then(res => console.log(res));
-    console.log(this.props);
+
   }
 
 
@@ -118,7 +118,7 @@ class SideMenu extends Component {
                         underlayColor={colorScheme.secondaryColor}
                         title={
                             <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select PortCall</Text>
+                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Vessel</Text>
                             </View>
                         }
                         onPress={() => {
