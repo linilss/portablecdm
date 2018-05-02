@@ -82,16 +82,18 @@ const InitiatePortCallNavigator = StackNavigator({
 });
 
 const MainNavigator = DrawerNavigator({
-    PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
-    Berths: { screen: BerthViewNavigator },
+      PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
+  FavoriteOverview: { screen: OverviewNavigator },
+  Berths: { screen: BerthViewNavigator },
   TimeLine: {screen: TimeLineNavigator},
   EtaView: { screen: EtaNavigator },
-    FavoriteStatesSideMenu: { screen: StateList },
-    FavoriteStatesInit: { screen: InitiatePortCallNavigator },
-    VesselInfo: { screen: VesselInfo },
-    Settings: { screen: SettingsNavigator },
-    About: { screen: AboutView },
-    Error: { screen: ErrorView },
+  FavoriteStatesSideMenu: { screen: StateList },
+  FavoriteStatesInit: { screen: InitiatePortCallNavigator },
+  VesselInfo: { screen: VesselInfo },
+  Settings: { screen: SettingsNavigator },
+  About: { screen: AboutView },
+  Error: { screen: ErrorView },
+
 }, {
     headerMode: 'none',
     drawerWidth: 3*Dimensions.get('window').width/4,

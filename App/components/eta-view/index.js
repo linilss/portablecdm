@@ -20,7 +20,7 @@ import {
 } from 'react-native-elements';
 
 import TopHeader from '../top-header-view';
-import OperationView from './sections/operationview';
+
 
 import { 
     fetchPortCallEvents, 
