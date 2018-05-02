@@ -42,16 +42,19 @@ class EtaView extends Component {
 
   componentWillMount() {
         portCallId = this.props.portCallId;
-        timer = setInterval(() => this.loadOperations, 60000);
+    //timer = setInterval(() => this.loadOperations, 60000);
 
 
-        if (!!portCallId)
-            this.loadOperations();
+    //if (!!portCallId)
+    //this.loadOperations();
     }
 
     componentWillUnmount() {
         clearInterval(timer);
     }
+  goToStateList = () => {
+    this.props.navigation.navigate('EtaPopup');
+  }
 
     render() {
         return(
@@ -95,7 +98,30 @@ const styles = StyleSheet.create ({
 });
 
 
-export default EtaView;
+
+function mapStateToProps(state) {
+  return {
+    loading: state.portCalls.selectedPortCallIsLoading,
+    operations: state.portCalls.selectedPortCallOperations,
+    vesselName: state.portCalls.vessel.name,
+    imo: state.portCalls.vessel.imo,
+    portCallId: state.portCalls.selectedPortCall.portCallId,
+    favoritePortCalls: state.favorites.portCalls,
+    favoriteVessels: state.favorites.vessels,
+    error: state.error,
+    fetchReliability: state.settings.fetchReliability,
+  };
+}
+
+export default connect(mapStateToProps, {
+  changeFetchReliability, 
+  fetchPortCallEvents, 
+  removeError,
+  toggleFavoritePortCall,
+  toggleFavoriteVessel,
+})(EtaView);
+
+
 
 
 

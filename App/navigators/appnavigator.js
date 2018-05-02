@@ -22,6 +22,7 @@ import ErrorView            from '../components/error-view';
 import BearthList           from '../components/berth-list-view';
 import BerthList            from '../components/berth-list-view';
 import BerthTimeLine        from '../components/berth-timeline-view';
+import EtaPopup             from '../components/eta-popup';
 
 
 
@@ -59,6 +60,7 @@ const PortCallListNavigator = StackNavigator({
 
 const EtaNavigator = StackNavigator({
   EtaView: {screen: EtaView},
+  EtaPopup: {screen: EtaPopup},
 
 }, {
   headerMode: 'none',
