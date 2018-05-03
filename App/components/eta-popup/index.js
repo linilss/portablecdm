@@ -4,7 +4,6 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  Button,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -13,14 +12,18 @@ import {
   List,
   ListItem,
   Icon,
-  CheckBox
+  CheckBox,
+  Button
 } from 'react-native-elements';
+import styles from '../../config/styles';
 
+//https://github.com/mmazzarolo/react-native-modal-datetime-picker
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { connect } from 'react-redux';
 import { removeFavoriteState, addFavoriteState, } from '../../actions'
 import TopHeader from '../top-header-view';
 import colorScheme from '../../config/colors';
+
 
 class EtaPopup extends Component {
   state = {
@@ -53,59 +56,102 @@ class EtaPopup extends Component {
 
 
   render() {
+    const { navigate, state } = this.props.navigation;
     return(
       <View style={styles.container}>
-        <TopHeader title={'Create port call'}
+
+      <TopHeader title={'Leave ETA to traffic area'}
+      navigation={this.props.navigation}      />
+      <View style={styles.headerContainer} >
+      </View>
+
+      <Button
+      title="Select arrival date"
+      onPress={this._showDatePicker}
+      buttonStyle={locStyles.buttonStyle}
+      backgroundColor={colorScheme.primaryColor}
+      color={colorScheme.primaryTextColor}
+      />
+
+      <Text style={styles.texts.headerText} h3>
+      {this.state.date}
+      </Text>
+
+      <Button
+      title="Select arrival time"
+      onPress={this._showTimePicker}
+      buttonStyle={locStyles.buttonStyle}
+      backgroundColor={colorScheme.primaryColor}
+      color={colorScheme.primaryTextColor}
         />
-        <View style={styles.headerContainer} >
-        <Text style={styles.headerSubText}>Select HEJ</Text>
-        <TouchableOpacity onPress={this._showDatePicker}>
-        <Text>Show DatePicker</Text>
-        </TouchableOpacity>
-        <Text>{ this.state.date }</Text>
-        <TouchableOpacity onPress={this._showTimePicker}>
-        <Text>Show TimePicker</Text>
-        </TouchableOpacity>
-        <Text>{ this.state.time }</Text>
+
+      <Text style={styles.texts.headerText} h3>
+      {this.state.time}
+      </Text>
 
 
 
-        <DateTimePicker
-      mode={'date'}
+          <DateTimePicker
+          mode={'date'}
       isVisible={this.state.isDatePickerVisible}
       onConfirm={this._handleDatePicked}
       onCancel={this._hideDatePicker}
-        />
-        <DateTimePicker
+      />
+
+      <DateTimePicker
       mode={'time'}
       is24Hour={true}
       isVisible={this.state.isTimePickerVisible}
       onConfirm={this._handleTimePicked}
       onCancel={this._hideTimePicker}
-        />
-        
-        </View>
+      />
+
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
+const locStyles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colorScheme.backgroundColor,
   },
-  headerContainer: {
-    backgroundColor: colorScheme.primaryColor,
-    alignItems: 'center',
-    flexDirection: 'column',
-    },
-    headerSubText: {
-        textAlign: 'center',
-        color: colorScheme.primaryTextColor,
-        fontSize: 18,
-        fontWeight: 'bold',
-     },
+  scrollContainer: {
+    backgroundColor: colorScheme.backgroundColor,
+    //   paddingTop: 20,
+  },
+  formContainerStyle: {
+    backgroundColor: colorScheme.primaryContainerColor,
+    margin: 10,
+    paddingBottom: 10,
+    paddingTop: 10,
+    borderColor: colorScheme.tertiaryTextColor,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  buttonStyle: {
+    //backgroundColor: colorScheme.primaryColor,
+    marginBottom: 10,
+    marginTop: 10,
+    borderColor: colorScheme.primaryColor,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  titleStyle: {
+    color: colorScheme.quaternaryTextColor,
+    fontSize: 16,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+  },
+  badgeText: {
+    color: colorScheme.secondaryColor,
+  },
+  sliderStyle: {
+    marginLeft: 20,
+    marginRight: 20,
+  }
 });
+
+
 
 function mapStateToProps(state) {
   return {
