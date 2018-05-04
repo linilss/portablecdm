@@ -29,14 +29,17 @@ class VesselInfo extends Component {
         };
     }
 
-    componentDidMount() {
-        this.props.fetchVesselFromIMO(this.props.vessel.imo.split('IMO:')[1]).then(() => {
+    componentDidMount() {  
+      this.props.fetchVesselFromIMO(this.props.favoriteVessels[0].split('IMO:')[1]).then(() => {
             // DOUBLE EQUALS!! 
             const ship = ships.find(ship => ship.mmsi == this.props.vessel.mmsi.split('MMSI:')[1]);
           this.setState({extraInfo: ship});
-          console.log(this.state.extraInfo);
-          console.log(ship);
+          console.log("ExtraInfo State: " + this.state.extraInfo);
+          console.log("Ship: " + ship);
         });
+        
+        
+        
     }
 
 
@@ -141,6 +144,7 @@ function mapStateToProps(state) {
       selectedPortCall: state.portCalls.selectedPortCall,
       vessel: state.portCalls.vessel,
       extendedVessel: state.vessel.vessel,
+      favoriteVessels: state.favorites.vessels,
     }
 }
 
