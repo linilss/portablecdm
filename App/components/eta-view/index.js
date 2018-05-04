@@ -96,6 +96,13 @@ class EtaView extends Component {
     render() {
         const { loading, operations, vesselName } = this.props;
         const {params} = this.props.navigation.state;
+        let portName = "";
+
+        if(operations[0]){
+          portName = operations[0].atLocation.name;
+
+        }
+
         let { dataSource } = this.state;
 
         if(!loading) dataSource = dataSource.cloneWithRows(operations);
@@ -103,7 +110,7 @@ class EtaView extends Component {
         return(
             <View style={{flex: 1, backgroundColor: colorScheme.primaryContainerColor}}>
                 <TopHeader
-                    title = 'ETA View'
+                    title = 'ETA to VTS Area'
                     firstPage
                     navigation={this.props.navigation}
                     rightIconFunction={this.goToStateList}
@@ -111,17 +118,21 @@ class EtaView extends Component {
                 <View
                     style={styles.headerContainer}
                 >
-                    <Text style={styles.headerText}>{vesselName}</Text>
+                    <Text style={styles.headerText}>{portName}</Text>
                     {operations.reliability >= 0 &&
                         <Text style={styles.headerTitleText}><Text style={{fontWeight: 'bold'}}>Reliability: </Text>{operations.reliability}%</Text>
                     }
                 </View>
+
 
                 {loading && <ActivityIndicator
                                 color={colorScheme.primaryColor}
                                 style={{alignSelf: 'center'}}
                                 animating={loading}
                                 size='large'/>}
+                                <View style={styles.infoContainer}>
+                                  <Text style={styles.infoText}>{'här lägger vi en timer för daily'}</Text>
+                                </View>
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
                 {!loading && <ListView
                                 enableEmptySections
@@ -173,6 +184,9 @@ const styles = StyleSheet.create ({
         textAlign: 'center',
         fontSize: 20,
         color: colorScheme.primaryTextColor,
+    },
+    infoContainer: {
+      backgroundColor: colorScheme.secondaryContainerColor,
     },
     headerTitleText: {
         textAlign: 'center',
