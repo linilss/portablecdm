@@ -89,15 +89,13 @@ class EtaPopup extends Component {
       {this.state.time}
       </Text>
 
-
-
-          <DateTimePicker
-          mode={'date'}
+      <DateTimePicker
+      mode={'date'}
       isVisible={this.state.isDatePickerVisible}
       onConfirm={this._handleDatePicked}
       onCancel={this._hideDatePicker}
       />
-
+      
       <DateTimePicker
       mode={'time'}
       is24Hour={true}
@@ -105,6 +103,14 @@ class EtaPopup extends Component {
       onConfirm={this._handleTimePicked}
       onCancel={this._hideTimePicker}
       />
+      <View style={{ backgroundColor: colorScheme.primaryColor, marginTop: 10, paddingVertical: 5, }}>
+      <Button
+      title="Confirm"
+      textStyle={{ color: colorScheme.primaryTextColor }}
+      buttonStyle={{ backgroundColor: colorScheme.primaryColor }}
+      onPress={() => alert('hello')}
+      />
+      </View>
 
       </View>
     );
