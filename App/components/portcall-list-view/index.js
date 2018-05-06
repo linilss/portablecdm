@@ -244,8 +244,8 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     backgroundColor: colorScheme.primaryColor,
-    flex: 4,
-    marginRight: 0,
+    flex: 1,
+    marginRight: 15,
     borderBottomWidth: 0,
     borderTopWidth: 0,
   },
