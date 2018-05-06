@@ -106,19 +106,8 @@ class PortCallList extends Component {
                         placeholderTextColor = {colorScheme.tertiaryTextColor}
                         onChangeText={text => this.setState({searchTerm: text})}
                         textInputRef='textInput'
-                    />
-                    <Button
-                        containerViewStyle={styles.buttonContainer}
-                        small
-                        icon={{
-                            name: 'filter-list',
-                            size: 30,
-                            color: colorScheme.primaryTextColor,
-                            style: styles.iconStyle,
-                        }}
-                        backgroundColor = {colorScheme.primaryColor}
-                        onPress= {() => navigate('FilterMenu')}
-                    />
+                    /> 
+
                 </View>
 
 
