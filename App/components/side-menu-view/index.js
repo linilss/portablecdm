@@ -31,10 +31,12 @@ class SideMenu extends Component {
     this._logout = this._logout.bind(this);
   }
   async componentWillMount() {
-
-    await this.props.fetchVesselFromIMO(this.props.favoriteVessels[0].split('IMO:')[1])
-      .then(res => console.log(res));
-
+    if(this.props.favoriteVessels[0] != null) {
+      await this.props.fetchVesselFromIMO(this.props.favoriteVessels[0].split('IMO:')[1])
+                .then(res => console.log(res));
+    } else {
+      console.log("No favorite vessel");
+    }
   }
 
 
@@ -55,7 +57,7 @@ class SideMenu extends Component {
 
     const { navigate, state } = this.props.navigation;
     const { selectedPortCall, activeItemKey } = this.props;
-    const vessel = this.props.extendedVessel;
+    const vessel = this.props.extendedVessel ? this.props.extendedVessel : this.props.vessel;
 
     //console.log(this.props);
     //const vessel2 = fetchVesselFromIMO(this.props.favoriteVessels[0].split(":").slice(-1)[0]);
