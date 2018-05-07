@@ -26,11 +26,11 @@ import TopHeader from '../top-header-view';
 import colorScheme from '../../config/colors';
 
 const STAGES = [
-    '72h',
-    '48h',
-    '24h',
-    '12h',
-    '6h',
+'72h',
+'48h',
+'24h',
+'12h',
+'6h',
 ];
 
 
@@ -72,6 +72,7 @@ class EtaPopup extends Component {
 
   render() {
     const { navigate, state } = this.props.navigation;
+
     return(
       <View style={styles.container}>
 
@@ -98,7 +99,7 @@ class EtaPopup extends Component {
       buttonStyle={locStyles.buttonStyle}
       backgroundColor={colorScheme.primaryColor}
       color={colorScheme.primaryTextColor}
-        />
+      />
 
       <Text style={styles.texts.headerText} h3>
       {this.state.time}
@@ -125,102 +126,92 @@ class EtaPopup extends Component {
       checkedIcon='dot-circle-o'
       uncheckedIcon='circle-o'
       checked={this.state.checked72}
-      //onPress={()=>this.setState}
       onPress={() => {
         this.setState({checked72: !this.state.checked72})
         if(checked72 = true){
-          checked48 = false;
-          checked24 = false;
-          checked12 = false;
-          checked6 = false;
+          this.state.checked48 = false;
+          this.state.checked24 = false;
+          this.state.checked12 = false;
+          this.state.checked6 = false;
         }}}
-      />
+        />
 
-      <CheckBox
-      center
-      title='48h'
-      checkedIcon='dot-circle-o'
-      uncheckedIcon='circle-o'
-      checked={this.state.checked48}
-      onPress={() =>{
-        this.setState({checked48: !this.state.checked48})
-        if(checked48 = true){
-          checked72 = false;
-          checked24 = false;
-          checked12 = false;
-          checked6 = false;
-        }}}
-      />
+        <CheckBox
+        center
+        title='48h'
+        checkedIcon='dot-circle-o'
+        uncheckedIcon='circle-o'
+        checked={this.state.checked48}
+        onPress={() =>{
+          this.setState({checked48: !this.state.checked48})
+          if(checked48 = true){
+            checked72 = false;
+            checked24 = false;
+            checked12 = false;
+            checked6 = false;
+          }}}
+          />
 
-      />
+          <CheckBox
+          center
+          title='24h'
+          checkedIcon='dot-circle-o'
+          uncheckedIcon='circle-o'
+          checked={this.state.checked24}
+          onPress={() =>{
+            this.setState({checked24: !this.state.checked24})
+            if(checked24 == true){
+              checked48 = false;
+              checked72 = false;
+              checked12 = false;
+              checked6 = false;
+            }}}
+            />
 
-      <CheckBox
-      center
-      title='24h'
-      checkedIcon='dot-circle-o'
-      uncheckedIcon='circle-o'
-      checked={this.state.checked24}
-      onPress={() =>{
-        this.setState({checked24: !this.state.checked24})
-        if(checked24 == true){
-          checked48 = false;
-          checked72 = false;
-          checked12 = false;
-          checked6 = false;
-        }}}
-      />
+            <CheckBox
+            center
+            title='12h'
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            checked={this.state.checked12}
+            onPress={() =>{
+              this.setState({checked12: !this.state.checked12})
+              if(checked12 == true){
+                checked48 = false;
+                checked24 = false;
+                checked72 = false;
+                checked6 = false;
+              }}}
+              />
 
-      />
+              <CheckBox
+              center
+              title='6h'
+              checkedIcon='dot-circle-o'
+              uncheckedIcon='circle-o'
+              checked={this.state.checked6}
+              onPress={() =>{
+                this.setState({checked6: !this.state.checked6})
+                if(checked6 == true){
+                  checked48 = false;
+                  checked24 = false;
+                  checked12 = false;
+                  checked72 = false;
+                }}}
+                />
 
-      <CheckBox
-      center
-      title='12h'
-      checkedIcon='dot-circle-o'
-      uncheckedIcon='circle-o'
-      checked={this.state.checked12}
-      onPress={() =>{
-        this.setState({checked72: !this.state.checked12})
-        if(checked12 == true){
-          checked48 = false;
-          checked24 = false;
-          checked72 = false;
-          checked6 = false;
-        }}}
-      />
-      />
+                <View style={{ backgroundColor: colorScheme.primaryColor, marginTop: 10, paddingVertical: 5, }}>
+                <Button
+                title="Confirm"
+                textStyle={{ color: colorScheme.primaryTextColor }}
+                buttonStyle={{ backgroundColor: colorScheme.primaryColor }}
+                onPress={() => alert('hello')}
+                />
+                </View>
 
-
-      <CheckBox
-      center
-      title='6h'
-      checkedIcon='dot-circle-o'
-      uncheckedIcon='circle-o'
-      checked={this.state.checked6}
-      onPress={() =>{
-        this.setState({checked6: !this.state.checked6})
-        if(checked6 == true){
-          checked48 = false;
-          checked24 = false;
-          checked12 = false;
-          checked72 = false;
-        }}}
-      />
-      />
-
-
-
-      <View style={{ backgroundColor: colorScheme.primaryColor, marginTop: 10, paddingVertical: 5, }}>
-      <Button
-      title="Confirm"
-      textStyle={{ color: colorScheme.primaryTextColor }}
-      buttonStyle={{ backgroundColor: colorScheme.primaryColor }}
-      onPress={() => alert('hello')}
-      />
-      </View>
-
-      </View>
-    );
-  }
+                </View>
+                );
+}
 }
 const locStyles = StyleSheet.create({
   container: {
