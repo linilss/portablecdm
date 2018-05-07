@@ -32,6 +32,8 @@ import {
 import { getTimeDifferenceString } from '../../util/timeservices';
 import colorScheme from '../../config/colors';
 
+import OperationView from './sections/operationview';
+
 const timer = null;
 const portCallId = null;
 
