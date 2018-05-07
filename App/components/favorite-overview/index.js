@@ -211,7 +211,7 @@ class FavoriteOverview extends Component {
 
     search(portCalls, searchTerm) {
         let { filters } = this.props;
-
+      filters.sort_by = 'ARRIVAL_DATE';
         return portCalls.filter(portCall => {
             return (portCall.vessel.name.toUpperCase().includes(searchTerm.toUpperCase()) ||
             portCall.vessel.imo.split('IMO:')[1].startsWith(searchTerm) ||
