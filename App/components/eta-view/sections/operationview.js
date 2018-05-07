@@ -46,7 +46,7 @@ class OperationView extends Component {
     const { reportedStates } = operation;
     console.log("HEJSAN");
     console.log(operation[0]);
-  
+
     this.state = {
       operation: operation,
       reportedStates: reportedStates,
@@ -57,6 +57,7 @@ class OperationView extends Component {
       },
       selectedWarning: undefined,
     }
+
 
     this._toggleCollapsed = this._toggleCollapsed.bind(this);
     this.renderStateRow = this.renderStateRow.bind(this);

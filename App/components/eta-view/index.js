@@ -159,13 +159,22 @@ class EtaView extends Component {
                                         }
                                     }
                                     if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
-                                    return <OperationView
-                                        operation={data}
-                                        rowNumber={rowId}
-                                        navigation={this.props.navigation}
-                                        vesselName={vesselName}
-                                        />
+                                    if(data.at.includes('traffic_area')) {
+
+
+                                      return <OperationView
+                                          operation={data}
+                                          rowNumber={rowId}
+
+                                          navigation={this.props.navigation}
+                                          vesselName={vesselName}
+                                          />
                                     }
+                                    else {
+                                      return null;
+                                    }
+
+                                  }
                                 }
                             />
                 }
