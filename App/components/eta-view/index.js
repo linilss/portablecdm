@@ -20,7 +20,7 @@ import {
 } from 'react-native-elements';
 
 import TopHeader from '../top-header-view';
-import OperationView from './sections/operationview';
+
 
 import {
     fetchPortCallEvents,
@@ -54,7 +54,7 @@ class EtaView extends Component {
     console.log(this.props);
 
         portCallId = this.props.portCallId;
-        timer = setInterval(() => this.loadOperations, 60000);
+    //timer = setInterval(() => this.loadOperations, 60000);
 
         this.loadOperations = this.loadOperations.bind(this);
         if (!!portCallId)
@@ -88,6 +88,9 @@ class EtaView extends Component {
     componentWillUnmount() {
         clearInterval(timer);
     }
+  goToStateList = () => {
+    this.props.navigation.navigate('EtaPopup');
+  }
 
     goToStateList = () => {
         this.props.navigation.navigate('FavoriteStates'); //LÄGG TILL FUNKTIONEN SOM PEKAR TILL K8 HÄR
