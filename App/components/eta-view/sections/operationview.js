@@ -44,9 +44,7 @@ class OperationView extends Component {
 
     const { operation } = this.props;
     const { reportedStates } = operation;
-    console.log("HEJSAN");
-    console.log(operation[0]);
-
+  
     this.state = {
       operation: operation,
       reportedStates: reportedStates,
@@ -57,7 +55,6 @@ class OperationView extends Component {
       },
       selectedWarning: undefined,
     }
-
 
     this._toggleCollapsed = this._toggleCollapsed.bind(this);
     this.renderStateRow = this.renderStateRow.bind(this);
@@ -209,7 +206,8 @@ class OperationView extends Component {
               {
                 Object.keys(reportedStates)
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
-                  .sort((a, b) => a.time < b.time ? -1 : 1)
+                      .sort((a, b) => a.time < b.time ? -1 : 1)
+                  .slice(0,1)
                   .map((mostRelevantStatement) => this.renderStateRow(operation,
                                                         mostRelevantStatement,
                                                         reportedStates[mostRelevantStatement.stateDefinition],
@@ -291,7 +289,7 @@ class OperationView extends Component {
         title = {
             <TouchableWithoutFeedback
                 style={{flexDirection:'column'}}
-                onPress={ () => navigate('StateDetails', {operation: operation, statements: allOfTheseStatements} ) }
+                onPress={ () => {navigate('EtaStateDetails', {operation: operation, statements: allOfTheseStatements} ); console.log("HÄR");console.log(operation);console.log("HIT");console.log(allOfTheseStatements);console.log("JAJAJJA");} }
             >
               <View>
                   <View style={{flexDirection: 'row'}}>

@@ -11,6 +11,7 @@ import PortCallList         from '../components/portcall-list-view';
 import FavoriteOverview     from '../components/favorite-overview';
 import FilterMenu           from '../components/portcall-list-view/sections/filterMenu';
 import StateDetails         from '../components/timeline-view/sections/statedetails';
+import EtaStateDetails      from '../components/eta-view/sections/statedetails';
 import VesselInfo           from '../components/vessel-info-view';
 import Settings             from '../components/settings-view';
 import LoginKeyCloakView    from '../components/loginkeycloak-view';
@@ -61,7 +62,8 @@ const PortCallListNavigator = StackNavigator({
 const EtaNavigator = StackNavigator({
   EtaView: {screen: EtaView},
   EtaPopup: {screen: EtaPopup},
-
+  EtaStateDetails: { screen: EtaStateDetails },
+  SendPortCall: { screen: SendPortCall },
 }, {
   headerMode: 'none',
 });

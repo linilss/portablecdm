@@ -53,7 +53,7 @@ class EtaView extends Component {
 
   componentWillMount() {
 
-    console.log(this.props);
+
 
         portCallId = this.props.portCallId;
     //timer = setInterval(() => this.loadOperations, 60000);
@@ -158,8 +158,11 @@ class EtaView extends Component {
                                             data.warnings.push({message: expiredMessage});
                                         }
                                     }
-                                    if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
-                                    if(data.at.includes('traffic_area')) {
+                                  if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
+
+                                  console.log(data.at);
+                                  if(data.at == null) { return null; }
+                                  if(data.at.includes('traffic_area')) {
 
 
                                       return <OperationView
