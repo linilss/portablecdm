@@ -12,9 +12,9 @@ import {
     Alert,
 } from 'react-native'
 
-import { 
-    List, 
-    ListItem, 
+import {
+    List,
+    ListItem,
     Icon,
     Text
 } from 'react-native-elements';
@@ -22,10 +22,10 @@ import {
 import TopHeader from '../top-header-view';
 
 
-import { 
-    fetchPortCallEvents, 
-    changeFetchReliability, 
-    removeError, 
+import {
+    fetchPortCallEvents,
+    changeFetchReliability,
+    removeError,
     toggleFavoritePortCall,
     toggleFavoriteVessel,
 } from '../../actions';
@@ -59,13 +59,13 @@ class EtaView extends Component {
     render() {
         return(
             <View style={{flex: 1, backgroundColor: colorScheme.primaryContainerColor}}>
-            <TopHeader 
-          title = 'ETA view' 
+            <TopHeader
+          title = 'ETA view'
           firstPage
-          navigation={this.props.navigation} 
+          navigation={this.props.navigation}
           rightIconFunction={this.goToStateList}
             />
-            <View 
+            <View
           style={styles.headerContainer}
             >
             <Text style={styles.headerText}>HEJ</Text>
@@ -74,7 +74,7 @@ class EtaView extends Component {
         );
     }
 
-    
+
 }
 
 
@@ -100,6 +100,7 @@ const styles = StyleSheet.create ({
 
 
 function mapStateToProps(state) {
+
   return {
     loading: state.portCalls.selectedPortCallIsLoading,
     operations: state.portCalls.selectedPortCallOperations,
@@ -114,15 +115,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  changeFetchReliability, 
-  fetchPortCallEvents, 
+  changeFetchReliability,
+  fetchPortCallEvents,
   removeError,
   toggleFavoritePortCall,
   toggleFavoriteVessel,
 })(EtaView);
-
-
-
-
-
-

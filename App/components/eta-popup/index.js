@@ -45,7 +45,7 @@ class EtaPopup extends Component {
     checked24: false,
     checked12: false,
     checked6: false,
-    checked: true,
+    checked: false,
   };
 
   _showDatePicker = () => this.setState({ isDatePickerVisible: true });
@@ -77,7 +77,7 @@ class EtaPopup extends Component {
       <View style={styles.container}>
 
       <TopHeader title={'Leave ETA to traffic area'}
-      navigation={this.props.navigation}      />
+      navigation={this.props.navigation}/>
       <View style={styles.headerContainer} >
       </View>
 
@@ -128,7 +128,7 @@ class EtaPopup extends Component {
       checked={this.state.checked72}
       onPress={() => {
         this.setState({checked72: !this.state.checked72})
-        if(checked72 = true){
+        if (checked72 = true){
           this.state.checked48 = false;
           this.state.checked24 = false;
           this.state.checked12 = false;
@@ -145,10 +145,10 @@ class EtaPopup extends Component {
         onPress={() =>{
           this.setState({checked48: !this.state.checked48})
           if(checked48 = true){
-            checked72 = false;
-            checked24 = false;
-            checked12 = false;
-            checked6 = false;
+            this.state.checked72 = false;
+            this.state.checked24 = false;
+            this.state.checked12 = false;
+            this.state.checked6 = false;
           }}}
           />
 
@@ -160,11 +160,11 @@ class EtaPopup extends Component {
           checked={this.state.checked24}
           onPress={() =>{
             this.setState({checked24: !this.state.checked24})
-            if(checked24 == true){
-              checked48 = false;
-              checked72 = false;
-              checked12 = false;
-              checked6 = false;
+            if(checked24 = true){
+            this.state.checked48 = false;
+            this.state.checked72 = false;
+            this.state.checked12 = false;
+            this.state.checked6 = false;
             }}}
             />
 
@@ -176,11 +176,11 @@ class EtaPopup extends Component {
             checked={this.state.checked12}
             onPress={() =>{
               this.setState({checked12: !this.state.checked12})
-              if(checked12 == true){
-                checked48 = false;
-                checked24 = false;
-                checked72 = false;
-                checked6 = false;
+              if(checked12 = true){
+                this.state.checked48 = false;
+                this.state.checked24 = false;
+                this.state.checked72 = false;
+                this.state.checked6 = false;
               }}}
               />
 
@@ -192,11 +192,11 @@ class EtaPopup extends Component {
               checked={this.state.checked6}
               onPress={() =>{
                 this.setState({checked6: !this.state.checked6})
-                if(checked6 == true){
-                  checked48 = false;
-                  checked24 = false;
-                  checked12 = false;
-                  checked72 = false;
+                if(checked6 = true){
+                  this.state.checked48 = false;
+                  this.state.checked24 = false;
+                  this.state.checked12 = false;
+                  this.state.checked72 = false;
                 }}}
                 />
 
