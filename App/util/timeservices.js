@@ -74,5 +74,11 @@ export function getTimeDifferenceString(time) {
     }
 
     timeDif = timeDif / 60; // hours
-    return `${Math.floor(timeDif)}h`;
+    if(timeDif > 24) {
+        let hours = timeDif%24;
+        let days = (timeDif-hours)/24;
+        return `${Math.floor(days)}d ${Math.floor(hours)}h`;
+    }
+    else
+        return `${Math.floor(timeDif)}h`;
 }
