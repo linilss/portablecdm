@@ -22,7 +22,7 @@ import Collapsible from 'react-native-collapsible';
 
 import StatementView from './statementview';
 
-import {getTimeDifferenceString, getTimeString, getDateString} from '../../../util/timeservices'
+import {getTimeDifferenceString, getDateTimeString, getTimeString, getDateString, getTimeDifferenceTwoString} from '../../../util/timeservices'
 import { cleanURN } from '../../../util/stringUtils';
 import colorScheme from '../../../config/colors';
 
@@ -282,23 +282,30 @@ class OperationView extends Component {
                                 {!!warnings && <Icon name='warning' color={colorScheme.warningColor} size={16} />}
                               </View>
                               <View style= {{flexDirection: 'row'}} >
-                                  <Text style = {{color: colorScheme.tertiaryColor, fontWeight: 'bold'}} >{getTimeString(new Date(stateToDisplay.time))} </Text>
+                                  <Text style = {{color: colorScheme.tertiaryColor, fontWeight: 'bold'}} >{getTimeDifferenceTwoString(new Date(stateToDisplay.reportedAt), new Date(stateToDisplay.time))} </Text>
+                                  <Text style = {{fontWeight: 'bold'}} > left </Text>
                               </View>
                           </View>
                     }
             
                     subtitle = {
                         <View style={{flexDirection: 'column'}} >
-                            {stateToDisplay.atLocation && <Text style={{fontSize: 9}}>
-                              <Text style = {styles.stateDisplaySubTitle}>AT: </Text>{stateToDisplay.atLocation.name}</Text>}
                             {stateToDisplay.fromLocation && <Text style={{fontSize: 9}}>
                               <Text style = {styles.stateDisplaySubTitle} >FROM: </Text>{stateToDisplay.fromLocation.name}</Text>}
                             {stateToDisplay.toLocation && <Text style={{fontSize: 9}}>
                               <Text style = {styles.stateDisplaySubTitle}>TO: </Text>{stateToDisplay.toLocation.name}</Text>}
+                            
                             <Text style={{fontSize: 9}}>
-                              {/*Doesnt work!*/}
+                              <Text style= {styles.stateDisplaySubTitle}>ETA: </Text>{getDateTimeString(new Date(stateToDisplay.time))}
+                            </Text>
+                            <Text style={{fontSize: 9}}>
+                              <Text style= {styles.stateDisplaySubTitle}>REPORTED AT: </Text>{getDateTimeString(new Date(stateToDisplay.reportedAt))}
+                              <Text style= {{color: colorScheme.tertiaryColor}} > {getTimeDifferenceString(new Date(stateToDisplay.reportedAt))} ago</Text>
+                            </Text>
+                            <Text style={{fontSize: 9}}>
                               <Text style= {styles.stateDisplaySubTitle}>REPORTED BY: </Text>{cleanURN(stateToDisplay.reportedBy)}
-                              <Text style= {{color: colorScheme.tertiaryColor}} > {getTimeDifferenceString(new Date(stateToDisplay.reportedAt))} ago</Text> </Text>
+                            </Text>
+                            
                             {(stateToDisplay.reliability >= 0) && <Text style={{fontSize: 9}}>
                               <Text style = {styles.stateDisplaySubTitle}>RELIABILITY: </Text>{stateToDisplay.reliability}%</Text> }
           
