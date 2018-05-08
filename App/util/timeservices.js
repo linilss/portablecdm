@@ -61,7 +61,13 @@ export function getDateTimeString(date) {
  *  A time in the past, to compare with the time now
  */
 export function getTimeDifferenceString(time) {
-    let timeDif = new Date() - time;
+    return getTimeDifferenceTwoString(time, new Date)
+}
+/* Get the time between two different timestamps */
+export function getTimeDifferenceTwoString(time, time2) { 
+    
+
+    let timeDif = Math.abs(time2 - time);
 
     // Seconds
     timeDif = timeDif / 1000;
@@ -90,5 +96,5 @@ export function getTimeDifferenceString(time) {
     //At 96 hours or more, display days + hours
     let hours = timeDif%24;
     let days = (timeDif-hours)/24;
-    return `${days}d ${Math.floor(hours)}h`;   
+    return `${days}d ${Math.floor(hours)}h`;  
 }
