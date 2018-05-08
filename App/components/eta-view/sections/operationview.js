@@ -48,7 +48,7 @@ class OperationView extends Component {
     this.state = {
       operation: operation,
       reportedStates: reportedStates,
-      isCollapsed: operation.endTimeType === 'ACTUAL',
+      isCollapsed: false,
       dimensions: {
           operation: undefined,
           timeContainer: undefined,
