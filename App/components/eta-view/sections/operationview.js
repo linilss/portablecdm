@@ -169,16 +169,11 @@ class OperationView extends Component {
             onPress={this._toggleCollapsed}>
             <View>
               <View style={{flexDirection: 'row'}}>
-                <Text style={styles.operationHeader}>{operation.definitionId.replace(/_/g, ' ')}</Text>
+                {operation.atLocation && <Text style={styles.operationHeader}><Text style={{fontWeight: 'bold'}}></Text>{operation.atLocation.name}</Text>}
                 {operation.warnings.length > 0 &&
                 <Icon name='warning' color={colorScheme.warningColor}/>
                 }
               </View>
-              {operation.reliability >= 0 && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>RELIABILITY </Text>{operation.reliability}%</Text>}
-              {operation.fromLocation && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>FROM </Text>{operation.fromLocation.name}</Text>}
-              {operation.toLocation && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>TO </Text>{operation.toLocation.name}</Text>}
-              {operation.atLocation && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>AT </Text>{operation.atLocation.name}</Text>}
-              {operation.status && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>STATUS </Text>{this.renderStatus(operation.status)}</Text>}
             </View>
           </TouchableWithoutFeedback>
 
