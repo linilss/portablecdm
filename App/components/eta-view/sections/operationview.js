@@ -136,19 +136,10 @@ class OperationView extends Component {
             if(renderRedLine)
                 this.setState({dimensions: {...this.state.dimensions, timeContainer: event.nativeEvent.layout}});
         }}>
-            <Text style={styles.dateDisplay}>{getDateString(startTime)}</Text>
-            <Text style={startTimeDisplayStyle}>{getTimeString(startTime).slice(0,5)}</Text>
-          </View>
-          {/*End Time*/}
-          <View style={[styles.timeDisplayContainer, {borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colorScheme.tertiaryColor}]}>
-            <Text style={styles.dateDisplay}>{getDateString(endTime)}</Text>
-            <Text style={endTimeDisplayStyle }>{getTimeString(endTime).slice(0,5)}</Text>
+           
           </View>
         </View>
-
-        {/* Red line indicating current time */}
-        {(!!this.state.dimensions && renderRedLine) && <View style={this._calculateRedline(startTime, endTime)}/>}
-
+        
         {/* Line and dots */}
         <View style={styles.timeline}>
           <View style={styles.line}>
