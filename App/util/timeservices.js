@@ -79,7 +79,7 @@ export function getTimeDifferenceString(time) {
     if(timeDif < 3*60) {
         let mins  = timeDif%60;
         let hours = (timeDif-mins)/60;
-        return `${hours}d ${Math.floor(mins)}h`;   
+        return `${hours}h ${Math.floor(mins)}m`;   
     }
     //Between 4 and 96 hours, display only hours
     if(timeDif < 96*60) {
