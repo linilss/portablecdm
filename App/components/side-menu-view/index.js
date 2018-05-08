@@ -85,9 +85,6 @@ class SideMenu extends Component {
                 <Text style={styles.headerText}>Select a Portcall</Text>}
             </View>
 
-
-            <Divider style={{backgroundColor: colorScheme.secondaryContainerColor, height: 0.7,}}/>
-
             <View style={styles.listContainer}>
                 <List style={{paddingTop: 0, backgroundColor: colorScheme.sidebarColor}}>
                     {/* Menu */}
@@ -192,20 +189,20 @@ class SideMenu extends Component {
       />
 
       <ListItem
-      containerStyle={activeItemKey === 'EtaView' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      containerStyle={activeItemKey === 'EtaView' ? [containerStyle, styles.selectedContainer] : containerStyle}
       leftIcon={{
-        name: 'home',
-        color: 'white'
-      }}
+        name:'timeline',
+        color: 'white'}}
       hideChevron
       underlayColor={colorScheme.secondaryColor}
       title={
         <View style={styles.textContainer}>
-        <Text style={canBeAccessedEverywhereExceptOnLogin}>ETA view</Text>
+        <Text style={textStyle}>ETA to VTS Area</Text>
         </View>
       }
       onPress={() => {
-        if(activeItemKey !== 'Login') navigate('EtaView');
+        if (haveSelectedPortCall && activeItemKey !== 'EtaView')
+          navigate('EtaView');
       }}
       />
 

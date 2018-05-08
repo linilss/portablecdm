@@ -20,6 +20,7 @@ import WarningView from './warning-view';
 
 import Collapsible from 'react-native-collapsible';
 
+import StatementView from './statementview';
 
 import {getTimeDifferenceString, getTimeString, getDateString} from '../../../util/timeservices'
 import { cleanURN } from '../../../util/stringUtils';
@@ -168,16 +169,11 @@ class OperationView extends Component {
             onPress={this._toggleCollapsed}>
             <View>
               <View style={{flexDirection: 'row'}}>
-                <Text style={styles.operationHeader}>{operation.definitionId.replace(/_/g, ' ')}</Text>
+                {operation.atLocation && <Text style={styles.operationHeader}><Text style={{fontWeight: 'bold'}}></Text>{operation.atLocation.name}</Text>}
                 {operation.warnings.length > 0 &&
                 <Icon name='warning' color={colorScheme.warningColor}/>
                 }
               </View>
-              {operation.reliability >= 0 && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>RELIABILITY </Text>{operation.reliability}%</Text>}
-              {operation.fromLocation && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>FROM </Text>{operation.fromLocation.name}</Text>}
-              {operation.toLocation && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>TO </Text>{operation.toLocation.name}</Text>}
-              {operation.atLocation && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>AT </Text>{operation.atLocation.name}</Text>}
-              {operation.status && <Text style={styles.operationInfo}><Text style={{fontWeight: 'bold'}}>STATUS </Text>{this.renderStatus(operation.status)}</Text>}
             </View>
           </TouchableWithoutFeedback>
 
@@ -279,18 +275,7 @@ class OperationView extends Component {
           borderBottomWidth: 0,
         }}
         key={stateToDisplay.messageId}
-        rightIcon = { <Icon
-                        color = {colorScheme.primaryColor}
-                        name='add-circle'
-                        size={35}
-                        onPress={() => this.addStatement(stateToDisplay.stateDefinition, stateToDisplay)}
-                        />
-        }
         title = {
-            <TouchableWithoutFeedback
-                style={{flexDirection:'column'}}
-                onPress={ () => {navigate('EtaStateDetails', {operation: operation, statements: allOfTheseStatements} ); console.log("HÄR");console.log(operation);console.log("HIT");console.log(allOfTheseStatements);console.log("JAJAJJA");} }
-            >
               <View>
                   <View style={{flexDirection: 'row'}}>
                     {!stateDef && <Text style={styles.stateDisplayTitle} >{stateToDisplay.stateDefinition}</Text>}
@@ -318,8 +303,8 @@ class OperationView extends Component {
                       }
                   </View>
               </View>
-            </TouchableWithoutFeedback>
         }
+
         subtitle = {
             <View style={{flexDirection: 'column'}} >
                 {stateToDisplay.atLocation && <Text style={{fontSize: 9}}>
@@ -349,13 +334,13 @@ class OperationView extends Component {
                     </View>
                   }
 
+                   <View>
+                      {allOfTheseStatements.map( statement => {
+                                  return <StatementView key={statement.messageId} statement={statement} stateDef={stateDef} />
+                              } )} 
+                  </View>
+
             </View>
-        }
-        badge = {
-          {value: stateCount, textStyle: {color: 'black', fontSize: 10, fontWeight: 'bold'},
-          containerStyle: {backgroundColor: colorScheme.backgroundColor} , // 30
-          wrapperStyle: {justifyContent: 'center'},
-          }
         }
       />
     );

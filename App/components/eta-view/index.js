@@ -53,8 +53,6 @@ class EtaView extends Component {
 
   componentWillMount() {
 
-
-
         portCallId = this.props.portCallId;
     //timer = setInterval(() => this.loadOperations, 60000);
 
@@ -90,9 +88,10 @@ class EtaView extends Component {
     componentWillUnmount() {
         clearInterval(timer);
     }
-  goToStateList = () => {
-    this.props.navigation.navigate('EtaPopup');
-  }
+
+    goToStateList = () => {
+        this.props.navigation.navigate('EtaPopup');
+    }
 
     goToStateList = () => {
         this.props.navigation.navigate('FavoriteStates'); //LÄGG TILL FUNKTIONEN SOM PEKAR TILL K8 HÄR
@@ -135,8 +134,11 @@ class EtaView extends Component {
                                 style={{alignSelf: 'center'}}
                                 animating={loading}
                                 size='large'/>}
-                                <View style={styles.infoContainer}>
-                                  <Text style={styles.infoText}>{'här lägger vi en timer för daily'}</Text>
+                                <View style={styles.dailyContainer}>
+                                  <Text style={styles.infoText}>{'0h 0m until next daily report'}</Text>
+                                </View>
+                                <View style={styles.reminderContainer}>
+                                  <Text style={styles.infoText}>{'Remeber to report when 72h left!'}</Text>
                                 </View>
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
                 {!loading && <ListView
@@ -202,8 +204,13 @@ const styles = StyleSheet.create ({
         fontSize: 20,
         color: colorScheme.primaryTextColor,
     },
-    infoContainer: {
-      backgroundColor: colorScheme.secondaryContainerColor,
+    reminderContainer: {
+      backgroundColor: colorScheme.warningColor,
+      padding: 15
+    },
+    dailyContainer: {
+        backgroundColor: colorScheme.secondaryContainerColor,
+        padding: 15
     },
     headerTitleText: {
         textAlign: 'center',
