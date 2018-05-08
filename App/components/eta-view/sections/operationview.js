@@ -278,30 +278,11 @@ class OperationView extends Component {
                     key={stateToDisplay.messageId}
                     title = {
                           <View>
-                              <View style={{flexDirection: 'row'}}>
-                                {!stateDef && <Text style={styles.stateDisplayTitle} >{stateToDisplay.stateDefinition}</Text>}
-                                {stateDef && <Text style={styles.stateDisplayTitle} >{stateDef.Name}</Text>}
-            
+                              <View style={{flexDirection: 'row'}}>            
                                 {!!warnings && <Icon name='warning' color={colorScheme.warningColor} size={16} />}
                               </View>
                               <View style= {{flexDirection: 'row'}} >
                                   <Text style = {{color: colorScheme.tertiaryColor, fontWeight: 'bold'}} >{getTimeString(new Date(stateToDisplay.time))} </Text>
-                                  {stateToDisplay.timeType === 'ACTUAL' && <View style={styles.actualContainer}>
-                                                                                <Text style={styles.actualText}>A</Text>
-                                                                           </View>
-                                  }
-                                  {stateToDisplay.timeType === 'ESTIMATED' && <View style={styles.estimateContainer}>
-                                                                                  <Text style={styles.estimateText}>E</Text>
-                                                                              </View>
-                                  }
-                                  {stateToDisplay.timeType === 'TARGET' && <View style={styles.targetContainer}>
-                                                                                <Text style={styles.estimateText}>T</Text>
-                                                                           </View>
-                                  }
-                                  {stateToDisplay.timeType === 'RECOMMENDED' && <View style={styles.recommendedContainer}>
-                                                                                <Text style={styles.estimateText}>R</Text>
-                                                                           </View>
-                                  }
                               </View>
                           </View>
                     }
