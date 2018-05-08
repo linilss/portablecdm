@@ -281,10 +281,6 @@ class OperationView extends Component {
         }}
         key={stateToDisplay.messageId}
         title = {
-            <TouchableWithoutFeedback
-                style={{flexDirection:'column'}}
-                onPress={ () => {navigate('EtaStateDetails', {operation: operation, statements: allOfTheseStatements} ); } }
-            >
               <View>
                   <View style={{flexDirection: 'row'}}>
                     {!stateDef && <Text style={styles.stateDisplayTitle} >{stateToDisplay.stateDefinition}</Text>}
@@ -312,7 +308,6 @@ class OperationView extends Component {
                       }
                   </View>
               </View>
-            </TouchableWithoutFeedback>
         }
 
         subtitle = {
