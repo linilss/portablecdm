@@ -20,6 +20,7 @@ import WarningView from './warning-view';
 
 import Collapsible from 'react-native-collapsible';
 
+import StatementView from './statementview';
 
 import {getTimeDifferenceString, getTimeString, getDateString} from '../../../util/timeservices'
 import { cleanURN } from '../../../util/stringUtils';
@@ -313,6 +314,7 @@ class OperationView extends Component {
               </View>
             </TouchableWithoutFeedback>
         }
+
         subtitle = {
             <View style={{flexDirection: 'column'}} >
                 {stateToDisplay.atLocation && <Text style={{fontSize: 9}}>
@@ -341,6 +343,12 @@ class OperationView extends Component {
                       </Text>
                     </View>
                   }
+
+                   <View>
+                      {allOfTheseStatements.map( statement => {
+                                  return <StatementView key={statement.messageId} statement={statement} stateDef={stateDef} />
+                              } )} 
+                  </View>
 
             </View>
         }
