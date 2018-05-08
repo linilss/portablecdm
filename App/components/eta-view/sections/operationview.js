@@ -279,17 +279,10 @@ class OperationView extends Component {
           borderBottomWidth: 0,
         }}
         key={stateToDisplay.messageId}
-        rightIcon = { <Icon
-                        color = {colorScheme.primaryColor}
-                        name='add-circle'
-                        size={35}
-                        onPress={() => this.addStatement(stateToDisplay.stateDefinition, stateToDisplay)}
-                        />
-        }
         title = {
             <TouchableWithoutFeedback
                 style={{flexDirection:'column'}}
-                onPress={ () => {navigate('EtaStateDetails', {operation: operation, statements: allOfTheseStatements} ); console.log("HÄR");console.log(operation);console.log("HIT");console.log(allOfTheseStatements);console.log("JAJAJJA");} }
+                onPress={ () => {navigate('EtaStateDetails', {operation: operation, statements: allOfTheseStatements} ); } }
             >
               <View>
                   <View style={{flexDirection: 'row'}}>
@@ -350,12 +343,6 @@ class OperationView extends Component {
                   }
 
             </View>
-        }
-        badge = {
-          {value: stateCount, textStyle: {color: 'black', fontSize: 10, fontWeight: 'bold'},
-          containerStyle: {backgroundColor: colorScheme.backgroundColor} , // 30
-          wrapperStyle: {justifyContent: 'center'},
-          }
         }
       />
     );
