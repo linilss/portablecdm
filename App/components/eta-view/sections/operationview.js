@@ -202,7 +202,7 @@ class OperationView extends Component {
               {
                 Object.keys(reportedStates)
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
-                      .sort((a, b) => a.time < b.time ? -1 : 1)
+                  .sort((a, b) => a.time > b.time ? -1 : 1)
                   .slice(0,1)
                   .map((mostRelevantStatement) => this.renderStateRow(operation,
                                                         mostRelevantStatement,
