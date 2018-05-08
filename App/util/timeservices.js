@@ -62,23 +62,33 @@ export function getDateTimeString(date) {
  */
 export function getTimeDifferenceString(time) {
     let timeDif = new Date() - time;
-    timeDif = timeDif / 1000; // seconds
 
+    // Seconds
+    timeDif = timeDif / 1000;
     if (timeDif < 60) {
         return `${Math.floor(timeDif)} sec`;
     }
 
-    timeDif = timeDif / 60; // minutes
+    // Minutes
+    timeDif = timeDif / 60; 
     if (timeDif < 60) {
         return `${Math.floor(timeDif)} min`;
     }
 
-    timeDif = timeDif / 60; // hours
-    if(timeDif > 24) {
-        let hours = timeDif%24;
-        let days = (timeDif-hours)/24;
-        return `${Math.floor(days)}d ${Math.floor(hours)}h`;
+    //With less than 3 hours, display hours + minutes
+    if(timeDif < 3*60) {
+        let mins  = timeDif%60;
+        let hours = (timeDif-mins)/60;
+        return `${hours}d ${Math.floor(mins)}h`;   
     }
-    else
-        return `${Math.floor(timeDif)}h`;
+    //Between 4 and 96 hours, display only hours
+    if(timeDif < 96*60) {
+        return `${Math.floor(timeDif/60)}h`;
+    }
+
+    timeDif = timeDif / 60;
+    //At 96 hours or more, display days + hours
+    let hours = timeDif%24;
+    let days = (timeDif-hours)/24;
+    return `${days}d ${Math.floor(hours)}h`;   
 }
