@@ -253,7 +253,6 @@ class OperationView extends Component {
   renderStateRow(operation, mostRelevantStatement, allOfTheseStatements, navigate, stateDef) {
     const { warnings } = allOfTheseStatements;
     const stateToDisplay = mostRelevantStatement;
-    const reportedTimeAgo = getTimeDifferenceString(new Date(stateToDisplay.reportedAt));
     const { displayOnTimeProbabilityTreshold } = this.props;
    // const stateCount = allOfTheseStatements.length;
     let stateCount = 0;
@@ -269,80 +268,64 @@ class OperationView extends Component {
 
 
     return (
-      <ListItem
-        containerStyle = {{
-          borderTopWidth: 0,
-          borderBottomWidth: 0,
-        }}
-        key={stateToDisplay.messageId}
-        title = {
-              <View>
-                  <View style={{flexDirection: 'row'}}>
-                    {!stateDef && <Text style={styles.stateDisplayTitle} >{stateToDisplay.stateDefinition}</Text>}
-                    {stateDef && <Text style={styles.stateDisplayTitle} >{stateDef.Name}</Text>}
-
-                    {!!warnings && <Icon name='warning' color={colorScheme.warningColor} size={16} />}
-                  </View>
-                  <View style= {{flexDirection: 'row'}} >
-                      <Text style = {{color: colorScheme.tertiaryColor, fontWeight: 'bold'}} >{getTimeString(new Date(stateToDisplay.time))} </Text>
-                      {stateToDisplay.timeType === 'ACTUAL' && <View style={styles.actualContainer}>
-                                                                    <Text style={styles.actualText}>A</Text>
-                                                               </View>
-                      }
-                      {stateToDisplay.timeType === 'ESTIMATED' && <View style={styles.estimateContainer}>
-                                                                      <Text style={styles.estimateText}>E</Text>
-                                                                  </View>
-                      }
-                      {stateToDisplay.timeType === 'TARGET' && <View style={styles.targetContainer}>
-                                                                    <Text style={styles.estimateText}>T</Text>
-                                                               </View>
-                      }
-                      {stateToDisplay.timeType === 'RECOMMENDED' && <View style={styles.recommendedContainer}>
-                                                                    <Text style={styles.estimateText}>R</Text>
-                                                               </View>
-                      }
-                  </View>
-              </View>
-        }
-
-        subtitle = {
-            <View style={{flexDirection: 'column'}} >
-                {stateToDisplay.atLocation && <Text style={{fontSize: 9}}>
-                  <Text style = {styles.stateDisplaySubTitle}>AT: </Text>{stateToDisplay.atLocation.name}</Text>}
-                {stateToDisplay.fromLocation && <Text style={{fontSize: 9}}>
-                  <Text style = {styles.stateDisplaySubTitle} >FROM: </Text>{stateToDisplay.fromLocation.name}</Text>}
-                {stateToDisplay.toLocation && <Text style={{fontSize: 9}}>
-                  <Text style = {styles.stateDisplaySubTitle}>TO: </Text>{stateToDisplay.toLocation.name}</Text>}
-                <Text style={{fontSize: 9}}>
-                  {/*Doesnt work!*/}
-                  <Text style= {styles.stateDisplaySubTitle}>REPORTED BY: </Text>{cleanURN(stateToDisplay.reportedBy)}
-                  <Text style= {{color: colorScheme.tertiaryColor}} > {reportedTimeAgo} ago</Text> </Text>
-                {(stateToDisplay.reliability >= 0) && <Text style={{fontSize: 9}}>
-                  <Text style = {styles.stateDisplaySubTitle}>RELIABILITY: </Text>{stateToDisplay.reliability}%</Text> }
-
-                  {(!!allOfTheseStatements.onTimeProbability && allOfTheseStatements.onTimeProbability.accuracy > displayOnTimeProbabilityTreshold) &&
-                    <View>
-                      <Text style={{fontSize: 9}}>
-                        <Text style = {styles.stateDisplaySubTitle}>ON TIME PROBABILITY: </Text>{allOfTheseStatements.onTimeProbability.probability}%
-                      </Text>
-                      <Text style={{fontSize: 9, marginLeft: 10}}>
-                        <Text style={styles.stateDisplaySubTitle}>REASON: </Text>{allOfTheseStatements.onTimeProbability.reason}
-                      </Text>
-                      <Text style={{fontSize: 9, marginLeft: 10}}>
-                        <Text style={styles.stateDisplaySubTitle}>ACCURACY: </Text>{allOfTheseStatements.onTimeProbability.accuracy}%
-                      </Text>
-                    </View>
-                  }
-
-                   <View>
-                      {allOfTheseStatements.map( statement => {
-                                  return <StatementView key={statement.messageId} statement={statement} stateDef={stateDef} />
-                              } )} 
-                  </View>
-
-            </View>
-        }
-      />
+      <View>
+        {allOfTheseStatements.map( stateToDisplay => {
+                    return <ListItem
+                    containerStyle = {{
+                      borderTopWidth: 0,
+                      borderBottomWidth: 0,
+                    }}
+                    key={stateToDisplay.messageId}
+                    title = {
+                          <View>
+                              <View style={{flexDirection: 'row'}}>
+                                {!stateDef && <Text style={styles.stateDisplayTitle} >{stateToDisplay.stateDefinition}</Text>}
+                                {stateDef && <Text style={styles.stateDisplayTitle} >{stateDef.Name}</Text>}
+            
+                                {!!warnings && <Icon name='warning' color={colorScheme.warningColor} size={16} />}
+                              </View>
+                              <View style= {{flexDirection: 'row'}} >
+                                  <Text style = {{color: colorScheme.tertiaryColor, fontWeight: 'bold'}} >{getTimeString(new Date(stateToDisplay.time))} </Text>
+                                  {stateToDisplay.timeType === 'ACTUAL' && <View style={styles.actualContainer}>
+                                                                                <Text style={styles.actualText}>A</Text>
+                                                                           </View>
+                                  }
+                                  {stateToDisplay.timeType === 'ESTIMATED' && <View style={styles.estimateContainer}>
+                                                                                  <Text style={styles.estimateText}>E</Text>
+                                                                              </View>
+                                  }
+                                  {stateToDisplay.timeType === 'TARGET' && <View style={styles.targetContainer}>
+                                                                                <Text style={styles.estimateText}>T</Text>
+                                                                           </View>
+                                  }
+                                  {stateToDisplay.timeType === 'RECOMMENDED' && <View style={styles.recommendedContainer}>
+                                                                                <Text style={styles.estimateText}>R</Text>
+                                                                           </View>
+                                  }
+                              </View>
+                          </View>
+                    }
+            
+                    subtitle = {
+                        <View style={{flexDirection: 'column'}} >
+                            {stateToDisplay.atLocation && <Text style={{fontSize: 9}}>
+                              <Text style = {styles.stateDisplaySubTitle}>AT: </Text>{stateToDisplay.atLocation.name}</Text>}
+                            {stateToDisplay.fromLocation && <Text style={{fontSize: 9}}>
+                              <Text style = {styles.stateDisplaySubTitle} >FROM: </Text>{stateToDisplay.fromLocation.name}</Text>}
+                            {stateToDisplay.toLocation && <Text style={{fontSize: 9}}>
+                              <Text style = {styles.stateDisplaySubTitle}>TO: </Text>{stateToDisplay.toLocation.name}</Text>}
+                            <Text style={{fontSize: 9}}>
+                              {/*Doesnt work!*/}
+                              <Text style= {styles.stateDisplaySubTitle}>REPORTED BY: </Text>{cleanURN(stateToDisplay.reportedBy)}
+                              <Text style= {{color: colorScheme.tertiaryColor}} > {getTimeDifferenceString(new Date(stateToDisplay.reportedAt))} ago</Text> </Text>
+                            {(stateToDisplay.reliability >= 0) && <Text style={{fontSize: 9}}>
+                              <Text style = {styles.stateDisplaySubTitle}>RELIABILITY: </Text>{stateToDisplay.reliability}%</Text> }
+          
+                        </View>
+                    }
+                  />
+                } )} 
+      </View>
     );
   }
 
