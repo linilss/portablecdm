@@ -49,7 +49,7 @@ class OperationView extends Component {
     this.state = {
       operation: operation,
       reportedStates: reportedStates,
-      isCollapsed: false,
+        isCollapsed: false,
       dimensions: {
           operation: undefined,
           timeContainer: undefined,
@@ -63,7 +63,7 @@ class OperationView extends Component {
   }
 
   _toggleCollapsed() {
-    this.setState({isCollapsed: !this.state.isCollapsed})
+    this.setState({isCollapsed: this.state.isCollapsed})
   }
 
   render() {
@@ -136,7 +136,6 @@ class OperationView extends Component {
             if(renderRedLine)
                 this.setState({dimensions: {...this.state.dimensions, timeContainer: event.nativeEvent.layout}});
         }}>
-           
           </View>
         </View>
         
@@ -195,12 +194,16 @@ class OperationView extends Component {
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
                   .sort((a, b) => a.time > b.time ? -1 : 1)
                   .slice(0,1)
-                  .map((mostRelevantStatement) => this.renderStateRow(operation,
-                                                        mostRelevantStatement,
-                                                        reportedStates[mostRelevantStatement.stateDefinition],
-                                                        this.props.navigation.navigate,
-                                                        getStateDefinition(mostRelevantStatement.stateDefinition)
-                                                      ))
+                      .filter((mostRelevantStatement) => {
+                          return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
+                      })
+                      .map((mostRelevantStatement) => this.renderStateRow(operation,
+                                                                          mostRelevantStatement,
+                                                                          reportedStates[mostRelevantStatement.stateDefinition],
+                                                                          this.props.navigation.navigate,
+                                                                          getStateDefinition(mostRelevantStatement.stateDefinition)
+                                                                         ))
+
               }
             </List>
           </Collapsible>
@@ -244,7 +247,8 @@ class OperationView extends Component {
   renderStateRow(operation, mostRelevantStatement, allOfTheseStatements, navigate, stateDef) {
     const { warnings } = allOfTheseStatements;
     const stateToDisplay = mostRelevantStatement;
-    const { displayOnTimeProbabilityTreshold } = this.props;
+      const { displayOnTimeProbabilityTreshold } = this.props;
+
    // const stateCount = allOfTheseStatements.length;
     let stateCount = 0;
     if (stateToDisplay.timeType === 'ACTUAL') {
@@ -261,7 +265,7 @@ class OperationView extends Component {
     return (
       <View>
         {allOfTheseStatements.map( stateToDisplay => {
-                    return <ListItem
+            return <ListItem
                     containerStyle = {{
                       borderTopWidth: 0,
                       borderBottomWidth: 0,

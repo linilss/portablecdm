@@ -162,11 +162,10 @@ class EtaView extends Component {
                                     }
                                   if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
 
-                                  console.log(data.at);
+
                                   if(data.at == null) { return null; }
                                   if(data.at.includes('traffic_area')) {
-
-
+                                      if(data.atLocation.name != 'TRAFFIC AREA') { return null; }
                                       return <OperationView
                                           operation={data}
                                           rowNumber={rowId}
