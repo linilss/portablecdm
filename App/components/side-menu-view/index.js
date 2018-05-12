@@ -111,6 +111,24 @@ class SideMenu extends Component {
 
 
       <ListItem
+      containerStyle={activeItemKey === 'ActualsView' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      leftIcon={{
+        name:'timeline',
+        color: 'white'}}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={textStyle}>Actuals Timeline</Text>
+        </View>
+      }
+        onPress={() => {
+            if (haveSelectedPortCall && activeItemKey !== 'ActualsView')
+                navigate('ActualsView');
+        }}
+        />
+
+      <ListItem
       containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
                         leftIcon={{
                           name:'home',

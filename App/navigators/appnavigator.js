@@ -23,7 +23,7 @@ import BearthList           from '../components/berth-list-view';
 import BerthList            from '../components/berth-list-view';
 import BerthTimeLine        from '../components/berth-timeline-view';
 import EtaPopup             from '../components/eta-popup';
-
+import ActualsView          from '../components/actuals-view';
 
 
 const BerthViewNavigator = StackNavigator({
@@ -66,6 +66,12 @@ const EtaNavigator = StackNavigator({
   headerMode: 'none',
 });
 
+const ActualsNavigator = StackNavigator({
+    ActualsView: {screen: ActualsView},
+}, {
+    headerMode: 'none',
+});
+
 
 const SettingsNavigator = StackNavigator({
   SettingsStart: { screen: Settings },
@@ -84,7 +90,8 @@ const InitiatePortCallNavigator = StackNavigator({
 });
 
 const MainNavigator = DrawerNavigator({
-      PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
+    PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
+    ActualsView: { screen: ActualsView },
   FavoriteOverview: { screen: OverviewNavigator },
   Berths: { screen: BerthViewNavigator },
   TimeLine: {screen: TimeLineNavigator},
