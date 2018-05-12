@@ -145,6 +145,7 @@ class TimeLineView extends Component {
                                         }
                                     }
                                     if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
+
                                     return <OperationView 
                                         operation={data}
                                         rowNumber={rowId}

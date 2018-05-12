@@ -48,7 +48,7 @@ class OperationView extends Component {
     this.state = {
       operation: operation,
       reportedStates: reportedStates,
-      isCollapsed: operation.endTimeType === 'ACTUAL',
+        isCollapsed: false,
       dimensions: {
           operation: undefined,
           timeContainer: undefined,
@@ -206,8 +206,11 @@ class OperationView extends Component {
               {
                 Object.keys(reportedStates)
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
-                  .sort((a, b) => a.time < b.time ? -1 : 1) 
-                  .map((mostRelevantStatement) => this.renderStateRow(operation, 
+                      .sort((a, b) => a.time < b.time ? -1 : 1)
+                      .filter(operation => {
+                          return operation.timeType === 'ACTUAL'
+                       })
+                      .map((mostRelevantStatement) => this.renderStateRow(operation, 
                                                         mostRelevantStatement, 
                                                         reportedStates[mostRelevantStatement.stateDefinition],
                                                         this.props.navigation.navigate,
