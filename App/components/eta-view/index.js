@@ -127,7 +127,6 @@ class EtaView extends Component {
                     }
                 </View>
 
-
                 {loading && <ActivityIndicator
                                 color={colorScheme.primaryColor}
                                 style={{alignSelf: 'center'}}
@@ -164,7 +163,7 @@ class EtaView extends Component {
 
                                   if(data.at == null) { return null; }
                                   if(data.at.includes('traffic_area')) {
-                                      if(data.atLocation.name != 'TRAFFIC AREA') { return null; }
+                                      if(data.atLocation.locationType != 'TRAFFIC_AREA') { return null; }
                                       return <OperationView
                                           operation={data}
                                           rowNumber={rowId}

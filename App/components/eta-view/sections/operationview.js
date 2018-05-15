@@ -125,10 +125,10 @@ class OperationView extends Component {
     let selectedStates = Object.keys(reportedStates)
     .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
     .sort((a, b) => a.time > b.time ? -1 : 1)
-    .slice(0,1)
-        .filter((mostRelevantStatement) => {
-            return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
-        });
+    .filter((mostRelevantStatement) => {
+        return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
+    })
+    .slice(0,1);
     /* Väldigt ful kod! Finns flera "ställen" så stämmer inte detta då den utgår från att det bara finns en Operation View */
     let selectedState = selectedStates[0];
 
@@ -212,16 +212,16 @@ class OperationView extends Component {
                 Object.keys(reportedStates)
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
                   .sort((a, b) => a.time > b.time ? -1 : 1)
+                  .filter((mostRelevantStatement) => {
+                      return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
+                  })
                   .slice(0,1)
-                      .filter((mostRelevantStatement) => {
-                          return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
-                      })
-                      .map((mostRelevantStatement) => this.renderStateRow(operation,
-                                                                          mostRelevantStatement,
-                                                                          reportedStates[mostRelevantStatement.stateDefinition],
-                                                                          this.props.navigation.navigate,
-                                                                          getStateDefinition(mostRelevantStatement.stateDefinition)
-                                                                         ))
+                  .map((mostRelevantStatement) => this.renderStateRow(operation,
+                                                                      mostRelevantStatement,
+                                                                      reportedStates[mostRelevantStatement.stateDefinition],
+                                                                      this.props.navigation.navigate,
+                                                                      getStateDefinition(mostRelevantStatement.stateDefinition)
+                                                                      ))
 
               }
             </List>
