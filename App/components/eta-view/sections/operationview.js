@@ -120,6 +120,17 @@ class OperationView extends Component {
     let currentTime = new Date();
     let renderRedLine = startTime > 0 && currentTime >= startTime && currentTime <= endTime;
     let redlineStyle = this._calculateRedline(startTime, endTime);
+    
+     /* Fixa data för pluset */
+    let selectedStates = Object.keys(reportedStates)
+    .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
+    .sort((a, b) => a.time > b.time ? -1 : 1)
+    .slice(0,1)
+        .filter((mostRelevantStatement) => {
+            return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
+        });
+    /* Väldigt ful kod! Finns flera "ställen" så stämmer inte detta då den utgår från att det bara finns en Operation View */
+    let selectedState = selectedStates[0];
 
     return (
 
@@ -163,6 +174,14 @@ class OperationView extends Component {
                 {operation.warnings.length > 0 &&
                 <Icon name='warning' color={colorScheme.warningColor}/>
                 }
+                
+                { <Icon
+                  color = {colorScheme.primaryColor}
+                  name='add-circle'
+                  size={35}
+                  onPress={() => this.addStatement(selectedState.stateDefinition, selectedState)}
+                  />
+              }
               </View>
             </View>
           </TouchableWithoutFeedback>

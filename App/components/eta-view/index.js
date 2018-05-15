@@ -116,8 +116,7 @@ class EtaView extends Component {
                 <TopHeader
                     title = 'ETA to VTS Area'
                     firstPage
-                    navigation={this.props.navigation}
-                    rightIconFunction={this.goToStateList}
+
                     />
                 <View
                     style={styles.headerContainer}
