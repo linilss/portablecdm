@@ -270,7 +270,7 @@ class SideMenu extends Component {
 
                     <ListItem
                         containerStyle={activeItemKey === 'About' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
-                        leftIcon={{name:'info',
+                        leftIcon={{name:'help-outline',
                         color: 'white'
                         }}
                         hideChevron
