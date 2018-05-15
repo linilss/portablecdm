@@ -282,14 +282,14 @@ class OperationView extends Component {
 
 
     return (
-      <View>
+        <View key={stateToDisplay.messageId}>
         {allOfTheseStatements.map( stateToDisplay => {
             return <ListItem
                     containerStyle = {{
                       borderTopWidth: 0,
                       borderBottomWidth: 0,
                     }}
-                    key={stateToDisplay.messageId}
+                         key={stateToDisplay.messageId}
                     title = {
                           <View>
                               <View style={{flexDirection: 'row'}}>            
