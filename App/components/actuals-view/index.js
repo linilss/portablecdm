@@ -40,7 +40,7 @@ class TimeLineView extends Component {
             showExpiredStates: false,
         }
 
-        this.goToStateList = this.goToStateList.bind(this);
+        this.goToStateList = this;
     }
 
   componentWillMount() {
@@ -86,7 +86,7 @@ class TimeLineView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-      const {params} = this.props.navigation.state;
+      //const {params} = this.props.navigation.state;
       let portName = "";
       if(operations[0]) {
         portName = operations[0].atLocation.name;

@@ -65,12 +65,13 @@ class OperationView extends Component {
 
   render() {
     const { operation, reportedStates, isCollapsed } = this.state;
-    const { rowNumber, navigation, getStateDefinition } = this.props;
+    const { getStateDefinition } = this.props;
 
     // Decide what dot to display
     let dotStyle = [styles.innerDot, styles.innerFutureDot];
     if(operation.endTimeType === 'ACTUAL') dotStyle = [styles.innerDot, styles.innerCompleteDot];
 
+    
     let startTimeDisplayStyle;
     if (operation.startTimeType === 'ACTUAL'){
       startTimeDisplayStyle = styles.timeDisplayActual;
@@ -79,6 +80,7 @@ class OperationView extends Component {
       startTimeDisplayStyle = styles.timeDisplayEstimate;
     }
     // This is not working as it should... Can make 13.00 become orange
+    //  startTimeDisplaystyle never used from here, why?
     else if (!operation.startTimeType) {
       startTimeDisplayStyle = styles.timeDisplayWarning;
     }
@@ -93,7 +95,8 @@ class OperationView extends Component {
     else if (operation.endTimeType === 'ESTIMATED'){
       endTimeDisplayStyle = styles.timeDisplayEstimate;
     }
-    if (!operation.endTimeType) {
+    //  endTimDisplayStyle never used from here, why?
+    else if (!operation.endTimeType) {
       endTimeDisplayStyle = styles.timeDisplayWarning;
       
     }

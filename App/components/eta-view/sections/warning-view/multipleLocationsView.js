@@ -11,7 +11,6 @@ import {
     ListItem,
 } from 'react-native-elements';
 
-import StatementView from '../statementview';
 import colorScheme from '../../../../config/colors';
 
 class MultipleLocationsView extends Component {

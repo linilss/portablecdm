@@ -7,8 +7,7 @@ import {
     Modal,
 } from 'react-native';
 import { 
-    Icon, 
-    List, 
+    Icon,  
 } from 'react-native-elements';
 
 import MultipleActualsView from './multipleActualsView';

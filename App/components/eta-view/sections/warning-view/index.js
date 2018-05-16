@@ -74,7 +74,7 @@ class WarningView extends Component {
     }
 
     render() {
-        const { onClose, warning, operation } = this.props;
+        const { onClose, warning} = this.props;
 
         if (!warning) {
             return null;

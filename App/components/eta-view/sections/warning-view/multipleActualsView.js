@@ -7,10 +7,6 @@ import {
     ScrollView,
 } from 'react-native';
 
-import {
-    List,
-} from 'react-native-elements';
-
 import StatementView from '../statementview';
 
 class MultipleActualsView extends Component {

@@ -11,9 +11,6 @@ import {
 } from 'react-native'
 
 import {
-    List,
-    ListItem,
-    Icon,
     Text
 } from 'react-native-elements';
 
@@ -27,7 +24,7 @@ import {
     toggleFavoritePortCall,
     toggleFavoriteVessel,
 } from '../../actions';
-import { getTimeDifferenceString } from '../../util/timeservices';
+
 import colorScheme from '../../config/colors';
 
 import OperationView from './sections/operationview';
@@ -98,7 +95,7 @@ class EtaView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-        const {params} = this.props.navigation.state;
+        this.props.navigation.state;
         let portName = "";
 
         if(operations[0]){

@@ -116,7 +116,7 @@ class OperationView extends Component {
     
     let currentTime = new Date();
     let renderRedLine = startTime > 0 && currentTime >= startTime && currentTime <= endTime;
-    let redlineStyle = this._calculateRedline(startTime, endTime);
+    //let redlineStyle = this._calculateRedline(startTime, endTime);
 
     return (
       
@@ -234,7 +234,7 @@ class OperationView extends Component {
         //console.log(JSON.stringify(this.state.dimensions));
         let { operation, timeContainer } = this.state.dimensions;
         let currentTime = new Date();    
-        let top = 100;
+        let top;
         if(this.state.isCollapsed) {
             top = operation.height / 2;
         } else {

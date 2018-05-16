@@ -28,8 +28,8 @@ class StatementView extends Component {
     constructor(props) {
         super(props);
 
-        this.statementReportedByMe = this.statementReportedByMe.bind(this);
-        this.handleWithdrawStatement = this.handleWithdrawStatement.bind(this);
+        this.statementReportedByMe = this;
+        this.handleWithdrawStatement = this;
     }
 
     // need to be revisited if/when supporting keycloak
