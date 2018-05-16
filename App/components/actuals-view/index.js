@@ -26,8 +26,8 @@ import {
 } from '../../actions';
 import colorScheme from '../../config/colors';
 
-const timer = null;
-const portCallId = null;
+let timer = null;
+let portCallId = null;
 
 class TimeLineView extends Component {
     constructor(props) {
