@@ -33,7 +33,7 @@ import colorScheme from '../../config/colors';
 import OperationView from './sections/operationview';
 
 const timer = null;
-const portCallId = null;
+let portCallId = null;
 
 class EtaView extends Component {
     constructor(props) {
