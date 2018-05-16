@@ -4,16 +4,14 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
 } from 'react-native';
+
+import colorScheme from '../../../../config/colors';
 
 import {
     List,
     ListItem,
 } from 'react-native-elements';
-
-import StatementView from '../statementview';
-import colorScheme from '../../../../config/colors';
 
 class MultipleLocationsView extends Component {
 

@@ -7,13 +7,7 @@ import {
     ScrollView,
 } from 'react-native';
 
-import {
-    List,
-    ListItem,
-} from 'react-native-elements';
-
 import StatementView from '../statementview';
-import colorScheme from '../../../../config/colors';
 
 class ConflictingDataView extends Component {
 

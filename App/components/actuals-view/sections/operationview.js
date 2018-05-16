@@ -13,7 +13,6 @@ import {
   List,
   ListItem,
   Icon,
-  Badge
 } from 'react-native-elements';
 
 import WarningView from './warning-view';
@@ -67,8 +66,7 @@ class OperationView extends Component {
 
   render() {
     const { operation, reportedStates, isCollapsed } = this.state;
-    const { rowNumber, navigation, getStateDefinition } = this.props;
-
+    const { getStateDefinition } = this.props;
     // Decide what dot to display
     let dotStyle = [styles.innerDot, styles.innerFutureDot];
     if(operation.endTimeType === 'ACTUAL') dotStyle = [styles.innerDot, styles.innerCompleteDot];

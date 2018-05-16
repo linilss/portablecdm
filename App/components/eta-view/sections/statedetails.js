@@ -13,14 +13,12 @@ import {
     Icon,
 } from 'react-native-elements';
 
-import Collapsible from 'react-native-collapsible';
 
 import colorScheme from '../../../config/colors';
 import TopHeader from '../../top-header-view';
 import StatementView from './statementview';
 
 import { withdrawStatement } from '../../../actions';
-import { cleanURN } from '../../../util/stringUtils';
 
 
 class StateDetails extends Component {
@@ -32,7 +30,7 @@ class StateDetails extends Component {
             operation: operation,
             statements: statements
         }
-        this.gotoReportPortCall = this.gotoReportPortCall.bind(this);
+        this.gotoReportPortCall = this.gotoReportPortCall();
     }
 
     
@@ -48,7 +46,7 @@ class StateDetails extends Component {
 
     render () {
         const { operation, statements } = this.state;
-        const { vessel, portCall, getStateDefinition, currentHost } = this.props;
+        const { vessel, getStateDefinition} = this.props;
         const stateDef = getStateDefinition(statements[0].stateDefinition);
 
         return(

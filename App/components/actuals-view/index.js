@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import {
     View,
     StyleSheet,
-    FlatList,
-    TouchableWithoutFeedback,
     ListView,
     ScrollView,
     ActivityIndicator,
@@ -12,10 +10,7 @@ import {
     Alert,
 } from 'react-native'
 
-import { 
-    List, 
-    ListItem, 
-    Icon,
+import {  
     Text
 } from 'react-native-elements';
 
@@ -29,7 +24,6 @@ import {
     toggleFavoritePortCall,
     toggleFavoriteVessel,
 } from '../../actions';
-import { getTimeDifferenceString } from '../../util/timeservices';
 import colorScheme from '../../config/colors';
 
 const timer = null;

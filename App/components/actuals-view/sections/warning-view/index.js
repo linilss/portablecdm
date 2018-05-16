@@ -9,7 +9,6 @@ import {
 import { 
     Icon, 
     List, 
-    ListItem, 
 } from 'react-native-elements';
 
 import MultipleActualsView from './multipleActualsView';
@@ -17,7 +16,6 @@ import MultipleVesselsAtBerthView from './multipleVesselsAtBerthView';
 import MissingDataView from './missingDataView';
 import MultipleLocationsView from './multipleLocationsView';
 import MiniHeader from '../../../mini-header-view';
-import StateDetails from '../statedetails';
 
 import colorScheme from '../../../../config/colors';
 import ConflictingDataView from './conflictingDataView';
@@ -77,7 +75,7 @@ class WarningView extends Component {
     }
 
     render() {
-        const { onClose, warning, operation } = this.props;
+        const { onClose, warning } = this.props;
 
         if (!warning) {
             return null;

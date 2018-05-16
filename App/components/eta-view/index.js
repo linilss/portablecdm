@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import {
     View,
     StyleSheet,
-    FlatList,
-    TouchableWithoutFeedback,
     ListView,
     ScrollView,
     ActivityIndicator,

@@ -13,16 +13,13 @@ import {
   List,
   ListItem,
   Icon,
-  Badge
 } from 'react-native-elements';
 
 import WarningView from './warning-view';
 
 import Collapsible from 'react-native-collapsible';
 
-import StatementView from './statementview';
-
-import {getTimeDifferenceString, getDateTimeString, getTimeString, getDateString, getTimeDifferenceTwoString} from '../../../util/timeservices'
+import {getTimeDifferenceString, getDateTimeString, getTimeDifferenceTwoString} from '../../../util/timeservices'
 import { cleanURN } from '../../../util/stringUtils';
 import colorScheme from '../../../config/colors';
 
@@ -266,7 +263,6 @@ class OperationView extends Component {
   renderStateRow(operation, mostRelevantStatement, allOfTheseStatements, navigate, stateDef) {
     const { warnings } = allOfTheseStatements;
     const stateToDisplay = mostRelevantStatement;
-      const { displayOnTimeProbabilityTreshold } = this.props;
 
    // const stateCount = allOfTheseStatements.length;
     let stateCount = 0;

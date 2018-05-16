@@ -9,10 +9,6 @@ import {
 } from 'react-native';
 
 import {
-  List,
-  ListItem,
-  Icon,
-  CheckBox,
   Button
 } from 'react-native-elements';
 import styles from '../../config/styles';
@@ -56,7 +52,7 @@ class EtaPopup extends Component {
 
 
   render() {
-    const { navigate, state } = this.props.navigation;
+    this.props.navigation;
     return(
       <View style={styles.container}>
 

@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import { 
     Icon, 
-    List, 
-    ListItem, 
 } from 'react-native-elements';
 
 import MultipleActualsView from './multipleActualsView';
@@ -17,7 +15,6 @@ import MultipleVesselsAtBerthView from './multipleVesselsAtBerthView';
 import MissingDataView from './missingDataView';
 import MultipleLocationsView from './multipleLocationsView';
 import MiniHeader from '../../../mini-header-view';
-import StateDetails from '../statedetails';
 
 import colorScheme from '../../../../config/colors';
 import ConflictingDataView from './conflictingDataView';
