@@ -46,7 +46,8 @@ class EtaView extends Component {
             showExpiredStates: false,
         }
 
-        this.goToStateList = this.goToStateList.bind(this);
+        //this.goToStateList = this.goToStateList.bind(this);
+        this.goToStateList = this;
     }
 
   componentWillMount() {
