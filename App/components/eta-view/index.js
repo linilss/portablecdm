@@ -95,7 +95,7 @@ class EtaView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-        this.props.navigation.state;
+    
         let portName = "";
 
         if(operations[0]){
