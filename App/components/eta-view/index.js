@@ -100,7 +100,6 @@ class EtaView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-        console.log("hejhej");
         let lastReported = "";
 
         if(operations.length > 0) {
@@ -141,10 +140,10 @@ class EtaView extends Component {
                                 animating={loading}
                                 size='large'/>}
                                 <View style={styles.dailyContainer}>
-                                  <Text style={styles.infoText}>{getTimeDifferenceTwoString(lastReported,Date.now())}</Text>
+                                  <Text style={styles.headerSubText}>{getTimeDifferenceTwoString(lastReported,Date.now()) + ' left to next noon report'}</Text>
                                 </View>
                                 <View style={styles.reminderContainer}>
-                                  <Text style={styles.infoText}>{'Remeber to report when 72h left!'}</Text>
+                                  <Text style={styles.headerSubText}>{'Remember to report when 72h left!'}</Text>
                                 </View>
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
                 {!loading && <ListView
@@ -213,13 +212,18 @@ const styles = StyleSheet.create ({
       padding: 15
     },
     dailyContainer: {
-        backgroundColor: colorScheme.secondaryContainerColor,
+        backgroundColor: colorScheme.white,
         padding: 15
     },
     headerTitleText: {
         textAlign: 'center',
         color: colorScheme.secondaryContainerColor,
         fontSize: 12,
+   },
+   headerSubText: {
+     textAlign: 'center',
+     color: colorScheme.black,
+     fontSize: 15,
    },
 });
 
