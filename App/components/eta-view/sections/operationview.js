@@ -93,8 +93,9 @@ class OperationView extends Component {
     else if (operation.endTimeType === 'ESTIMATED'){
       endTimeDisplayStyle = styles.timeDisplayEstimate;
     }
-    else if (!operation.endTimeType) {
+    if (!operation.endTimeType) {
       endTimeDisplayStyle = styles.timeDisplayWarning;
+      
     }
     else {
       endTimeDisplayStyle = styles.timeDisplay;
@@ -116,7 +117,6 @@ class OperationView extends Component {
 
     let currentTime = new Date();
     let renderRedLine = startTime > 0 && currentTime >= startTime && currentTime <= endTime;
-    let redlineStyle = this._calculateRedline(startTime, endTime);
     
      /* Fixa data för pluset */
     let selectedStates = Object.keys(reportedStates)
@@ -240,7 +240,7 @@ class OperationView extends Component {
         //console.log(JSON.stringify(this.state.dimensions));
         let { operation, timeContainer } = this.state.dimensions;
         let currentTime = new Date();
-        let top = 100;
+        let top;
         if(this.state.isCollapsed) {
             top = operation.height / 2;
         } else {
@@ -267,10 +267,10 @@ class OperationView extends Component {
    // const stateCount = allOfTheseStatements.length;
     let stateCount = 0;
     if (stateToDisplay.timeType === 'ACTUAL') {
-      stateCount = allOfTheseStatements.filter((statement)=> statement.timeType === 'ACTUAL').length;
+      allOfTheseStatements.filter((statement)=> statement.timeType === 'ACTUAL').length;
     }
     else if (stateToDisplay.timeType === 'ESTIMATED') {
-      stateCount = allOfTheseStatements.filter((statement)=> statement.timeType === 'ESTIMATED').length;
+      allOfTheseStatements.filter((statement)=> statement.timeType === 'ESTIMATED').length;
     }
     else {
       stateCount = allOfTheseStatements.length;

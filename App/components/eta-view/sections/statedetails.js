@@ -30,7 +30,7 @@ class StateDetails extends Component {
             operation: operation,
             statements: statements
         }
-        this.gotoReportPortCall = this.gotoReportPortCall.bind(this);
+        this.gotoReportPortCall = this;
     }
 
     
