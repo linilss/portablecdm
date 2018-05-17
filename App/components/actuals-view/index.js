@@ -40,7 +40,6 @@ class TimeLineView extends Component {
             showExpiredStates: false,
         }
 
-        this.goToStateList=this.goToStateList;
     }
 
   componentWillMount() {
