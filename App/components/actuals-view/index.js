@@ -40,7 +40,7 @@ class TimeLineView extends Component {
             showExpiredStates: false,
         }
 
-        this.goToStateList.bind(this);
+        //this.goToStateList = this.goToStateList.bind(this);
     }
 
   componentWillMount() {
@@ -102,7 +102,7 @@ class TimeLineView extends Component {
                     title = 'Actuals Timeline' 
                     firstPage
                     navigation={this.props.navigation} 
-                    rightIconFunction={this.goToStateList}
+                    rightIconFunction={this.goToStateList.bind(this)}
                     leftIcons={this.createFavoriteIcons()}
                     selectorIcon={this.createShowHideExpiredIcon()}/>
                 <View 
