@@ -27,9 +27,7 @@ class StatementView extends Component {
 
     constructor(props) {
         super(props);
-
-        this.statementReportedByMe = this;
-        this.handleWithdrawStatement = this;
+        
     }
 
     // need to be revisited if/when supporting keycloak
