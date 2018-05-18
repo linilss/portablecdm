@@ -14,8 +14,8 @@ class ConflictingDataView extends Component {
     
     render() {
         const { operation, warning } = this.props;
-        const statements = operation.statements.filter(statement => warning.references.some(ref => ref.refId === statement.messageId));
-        const timeDiff = warning.indicatorValues.find(val => val.type === 'TIME_DIFF').value;
+        const statements = operation.statements.filter((statement) => warning.references.some((ref) => ref.refId === statement.messageId));
+        const timeDiff = warning.indicatorValues.find((val) => val.type === 'TIME_DIFF').value;
         return (
             <View style={styles.mainContainer}>
                 <Text style={styles.header}>

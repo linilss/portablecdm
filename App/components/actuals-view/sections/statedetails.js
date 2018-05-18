@@ -28,7 +28,7 @@ class StateDetails extends Component {
         this.state = {
             operation: operation,
             statements: statements
-        }
+        };
         this.gotoReportPortCall = this;
     }
 
@@ -82,7 +82,7 @@ class StateDetails extends Component {
 
                     {/*StatementView*/}
                     {statements.map( statement => {
-                        return <StatementView key={statement.messageId} statement={statement} stateDef={stateDef} />
+                        return <StatementView key={statement.messageId} statement={statement} stateDef={stateDef} />;
                     } )} 
                 </ScrollView>
             </ScrollView>

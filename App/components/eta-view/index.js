@@ -40,7 +40,7 @@ class EtaView extends Component {
             dataSource: ds.cloneWithRows(['row 1, row 2']),
             refreshing: false,
             showExpiredStates: false,
-        }
+        };
 
         //this.goToStateList = this.goToStateList.bind(this);
         this.goToStateList = this;

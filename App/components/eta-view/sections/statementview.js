@@ -181,7 +181,7 @@ class StatementView extends Component {
 StatementView.propTypes = {
     statement: PropTypes.object.isRequired,
     stateDef: PropTypes.object,
-}
+};
 
             /*
             container

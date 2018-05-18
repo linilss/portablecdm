@@ -21,7 +21,7 @@ class MultipleActualsView extends Component {
                         Conflicting statements for {statements[0].stateDefinition.replace(/_/g, ' ')}
                 </Text>
                 <ScrollView>
-                    {statements.map(statement => <StatementView key={statement.messageId} statement={statement} />)}
+                    {statements.map((statement) => <StatementView key={statement.messageId} statement={statement} />)}
                     <View style={{height: 300}} />
                 </ScrollView>
             </View>

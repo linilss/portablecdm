@@ -50,7 +50,7 @@ class StatementView extends Component {
                                     'Failed withdrawing statement',
                                     err[0].message,
                                     [{text: 'Ok'}]
-                                )
+                                );
                             } else {
                                 Alert.alert(
                                     'Statement withdrawn',
@@ -60,7 +60,7 @@ class StatementView extends Component {
                                     }}]
                                 )
                             }
-                        })
+                        });
                 }}
             ]
         );

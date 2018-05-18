@@ -38,7 +38,7 @@ class TimeLineView extends Component {
             dataSource: ds.cloneWithRows(['row 1, row 2']),
             refreshing: false,
             showExpiredStates: false,
-        }
+        };
 
     }
 
@@ -134,7 +134,7 @@ class TimeLineView extends Component {
                                     }
                                     if (data.isExpired) {
                                         let expiredMessage = 'This event has expired.';
-                                        if (!data.warnings.some(w => w.message === expiredMessage)) {
+                                        if (!data.warnings.some((w) => w.message === expiredMessage)) {
                                             data.warnings.push({message: expiredMessage});
                                         }
                                     }

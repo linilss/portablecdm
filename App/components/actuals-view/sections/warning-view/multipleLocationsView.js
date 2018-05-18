@@ -22,7 +22,7 @@ class MultipleLocationsView extends Component {
     }
 
     getSweetExpensiveLocationName(urn) {
-        return this.props.allLocations.find(location => location.URN.toLowerCase() === urn.toLowerCase()).name;
+        return this.props.allLocations.find((location) => location.URN.toLowerCase() === urn.toLowerCase()).name;
     }
 
     render() {

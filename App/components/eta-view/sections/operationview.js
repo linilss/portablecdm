@@ -52,15 +52,15 @@ class OperationView extends Component {
           timeContainer: undefined,
       },
       selectedWarning: undefined,
-    }
-
+    };
+    
     this._toggleCollapsed = this._toggleCollapsed.bind(this);
     this.renderStateRow = this.renderStateRow.bind(this);
     this.addStatement = this.addStatement.bind(this);
   }
 
   _toggleCollapsed() {
-    this.setState({isCollapsed: this.state.isCollapsed})
+    this.setState({isCollapsed: this.state.isCollapsed});
   }
 
   render() {
@@ -106,7 +106,7 @@ class OperationView extends Component {
 
     /* THIS IS A DEVIATION FROM BACKEND */
     let firstStatement = Object.keys(reportedStates)
-    .map(stateDef => this.findMostRelevantStatement(reportedStates[stateDef]))
+    .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
     .sort((a,b) => a.time < b.time ? -1 : 1)[0];
 
     let lastStatement = Object.keys(reportedStates)
@@ -126,7 +126,7 @@ class OperationView extends Component {
     .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
     .sort((a, b) => a.time > b.time ? -1 : 1)
     .filter((mostRelevantStatement) => {
-        return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
+        return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea');
     })
     .slice(0,1);
     /* Väldigt ful kod! Finns flera "ställen" så stämmer inte detta då den utgår från att det bara finns en Operation View */
@@ -270,10 +270,10 @@ class OperationView extends Component {
    // const stateCount = allOfTheseStatements.length;
     let stateCount = 0;
     if (stateToDisplay.timeType === 'ACTUAL') {
-      allOfTheseStatements.filter((statement)=> statement.timeType === 'ACTUAL').length;
+      allOfTheseStatements.filter((statement) => statement.timeType === 'ACTUAL').length;
     }
     else if (stateToDisplay.timeType === 'ESTIMATED') {
-      allOfTheseStatements.filter((statement)=> statement.timeType === 'ESTIMATED').length;
+      allOfTheseStatements.filter((statement) => statement.timeType === 'ESTIMATED').length;
     }
     else {
       stateCount = allOfTheseStatements.length;
@@ -324,7 +324,7 @@ class OperationView extends Component {
           
                         </View>
                     }
-                  />
+                  />;
                 } )} 
       </View>
     );

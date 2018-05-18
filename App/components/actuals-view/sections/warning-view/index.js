@@ -49,7 +49,7 @@ class WarningView extends Component {
     }
 
     getVessel(vesselId) {
-        return this.props.portCalls.find(portCall => portCall.vesselId === vesselId).vessel;
+        return this.props.portCalls.find((portCall) => portCall.vesselId === vesselId).vessel;
     }
 
     renderDetails(warning) {
@@ -135,7 +135,7 @@ const descriptions = {
     'MULTIPLE_ACTUALS': 'There exists differing timestamps with type ACTUAL.',
     'VESSEL_AT_MULTIPLE_LOCATIONS': 'The vessel is reported to be at multiple locations at the same time.',
     'CONFLICTING_DATA': 'There is a difference in time in the reported data.',
-}
+};
 
 function mapStateToProps(state) {
     return {

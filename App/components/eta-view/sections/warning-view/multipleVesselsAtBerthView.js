@@ -18,7 +18,7 @@ class MultipleVesselsAtBerthView extends Component {
     
     render() {
         const { warning } = this.props;
-        const berth = this.props.formatLocation(warning.references.find(ref => ref.refType === 'LOCATION').refId.split('berth:')[1]);
+        const berth = this.props.formatLocation(warning.references.find((ref) => ref.refType === 'LOCATION').refId.split('berth:')[1]);
         return (
             <View>
                 <Text style={styles.header}>

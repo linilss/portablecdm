@@ -61,7 +61,7 @@ class OperationView extends Component {
   }
   
   _toggleCollapsed() {
-    this.setState({isCollapsed: !this.state.isCollapsed})
+    this.setState({isCollapsed: !this.state.isCollapsed});
   }
 
   render() {
@@ -102,7 +102,7 @@ class OperationView extends Component {
 
     /* THIS IS A DEVIATION FROM BACKEND */
     let firstStatement = Object.keys(reportedStates)
-    .map(stateDef => this.findMostRelevantStatement(reportedStates[stateDef]))
+    .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
     .sort((a,b) => a.time < b.time ? -1 : 1)[0];
 
     let lastStatement = Object.keys(reportedStates)

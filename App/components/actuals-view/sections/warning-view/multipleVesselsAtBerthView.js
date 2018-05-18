@@ -25,7 +25,7 @@ class MultipleVesselsAtBerthView extends Component {
                         {berth}
                 </Text>
                 <List>
-                    {warning.references.filter(ref => ref.refType === 'VESSEL').map(ref => {
+                    {warning.references.filter((ref) => ref.refType === 'VESSEL').map(ref => {
                         const vessel = this.props.getVessel(ref.refId);
                         return (
                             <ListItem
