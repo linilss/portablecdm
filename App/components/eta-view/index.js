@@ -103,10 +103,13 @@ class EtaView extends Component {
         let lastReported = "";
         let latestETA = "";
 
-        if(operations.length > 0) {
+        console.log(operations);
+        if(operations.length > 0 ) {
+          if(operations[0].reportedStates.hasOwnProperty('Arrival_Vessel_TrafficArea')){
           lastReported = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].reportedAt);
           lastReported.setDate(lastReported.getDate()+1);
           latestETA = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].time);
+          }
         }
         const {params} = this.props.navigation.state;
         let portName = "";
@@ -142,10 +145,10 @@ class EtaView extends Component {
                                 animating={loading}
                                 size='large'/>}
                                 <View style={styles.dailyContainer}>
-                                  <Text style={styles.headerSubText}>{'Time until noon report: '} </Text>
-                                  <Text style={{fontWeight: 'bold'}}> {getTimeDifferenceTwoString(lastReported,Date.now())}</Text>
-                                  <Text> {'      Time to arrival: '}</Text>
-                                  <Text style={{fontWeight: 'bold'}}> {getTimeDifferenceTwoString(latestETA,Date.now())} </Text>
+                                  <Text style={styles.headerSubText}>{'Time until noon report: '}</Text>
+                                  <Text style={{fontSize: 15,fontWeight: 'bold'}}> {getTimeDifferenceTwoString(Date.now(),lastReported)}</Text>
+                                  <Text style={styles.headerSubText}> {'      Time to arrival: '}</Text>
+                                  <Text style={{fontSize: 15,fontWeight: 'bold'}}> {getTimeDifferenceTwoString(Date.now(),latestETA)}</Text>
                                 </View>
 
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
@@ -218,7 +221,10 @@ const styles = StyleSheet.create ({
         backgroundColor: colorScheme.white,
         padding: 15,
         flex: 0.05,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        borderBottomWidth: 4,
+        borderBottomColor: '#3a6ea5',
     },
     headerTitleText: {
         textAlign: 'center',
