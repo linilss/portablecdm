@@ -103,7 +103,6 @@ class EtaView extends Component {
         let lastReported = "";
         let latestETA = "";
 
-        console.log(operations);
         if(operations.length > 0 ) {
           if(operations[0].reportedStates.hasOwnProperty('Arrival_Vessel_TrafficArea')){
           lastReported = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].reportedAt);
