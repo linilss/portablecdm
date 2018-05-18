@@ -25,7 +25,7 @@ import {
     toggleFavoriteVessel,
 } from '../../actions';
 import colorScheme from '../../config/colors';
-
+import { getTimeDifferenceTwoString } from '../../util/timeservices';
 import OperationView from './sections/operationview';
 
 const timer = null;
@@ -101,7 +101,6 @@ class EtaView extends Component {
           lastReported = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].reportedAt);
           lastReported.setDate(lastReported.getDate()+1);
         }
-        const {params} = this.props.navigation.state;
         let portName = "";
 
         if(operations[0]){
