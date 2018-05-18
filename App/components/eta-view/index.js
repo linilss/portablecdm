@@ -24,7 +24,6 @@ import {
     toggleFavoritePortCall,
     toggleFavoriteVessel,
 } from '../../actions';
-
 import colorScheme from '../../config/colors';
 
 import OperationView from './sections/operationview';
@@ -54,7 +53,8 @@ class EtaView extends Component {
 
         this.loadOperations = this.loadOperations.bind(this);
         if (!!portCallId)
-            this.loadOperations();
+          this.loadOperations();
+
     }
 
     loadOperations() {
@@ -95,7 +95,13 @@ class EtaView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-    
+        let lastReported = "";
+
+        if(operations.length > 0) {
+          lastReported = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].reportedAt);
+          lastReported.setDate(lastReported.getDate()+1);
+        }
+        const {params} = this.props.navigation.state;
         let portName = "";
 
         if(operations[0]){
@@ -129,10 +135,10 @@ class EtaView extends Component {
                                 animating={loading}
                                 size='large'/>}
                                 <View style={styles.dailyContainer}>
-                                  <Text style={styles.infoText}>{'0h 0m until next daily report'}</Text>
+                                  <Text style={styles.headerSubText}>{getTimeDifferenceTwoString(lastReported,Date.now()) + ' left to next noon report'}</Text>
                                 </View>
                                 <View style={styles.reminderContainer}>
-                                  <Text style={styles.infoText}>{'Remeber to report when 72h left!'}</Text>
+                                  <Text style={styles.headerSubText}>{'Remember to report when 72h left!'}</Text>
                                 </View>
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
                 {!loading && <ListView
@@ -163,7 +169,6 @@ class EtaView extends Component {
                                       return <OperationView
                                           operation={data}
                                           rowNumber={rowId}
-
                                           navigation={this.props.navigation}
                                           vesselName={vesselName}
                                           />
@@ -202,13 +207,18 @@ const styles = StyleSheet.create ({
       padding: 15
     },
     dailyContainer: {
-        backgroundColor: colorScheme.secondaryContainerColor,
+        backgroundColor: colorScheme.white,
         padding: 15
     },
     headerTitleText: {
         textAlign: 'center',
         color: colorScheme.secondaryContainerColor,
         fontSize: 12,
+   },
+   headerSubText: {
+     textAlign: 'center',
+     color: colorScheme.black,
+     fontSize: 15,
    },
 });
 
