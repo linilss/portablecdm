@@ -101,10 +101,12 @@ class EtaView extends Component {
     render() {
         const { loading, operations, vesselName } = this.props;
         let lastReported = "";
+        let latestETA = "";
 
         if(operations.length > 0) {
           lastReported = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].reportedAt);
           lastReported.setDate(lastReported.getDate()+1);
+          latestETA = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].time);
         }
         const {params} = this.props.navigation.state;
         let portName = "";
@@ -140,11 +142,12 @@ class EtaView extends Component {
                                 animating={loading}
                                 size='large'/>}
                                 <View style={styles.dailyContainer}>
-                                  <Text style={styles.headerSubText}>{getTimeDifferenceTwoString(lastReported,Date.now()) + ' left to next noon report'}</Text>
+                                  <Text style={styles.headerSubText}>{'Time until noon report: '} </Text>
+                                  <Text style={{fontWeight: 'bold'}}> {getTimeDifferenceTwoString(lastReported,Date.now())}</Text>
+                                  <Text> {'      Time to arrival: '}</Text>
+                                  <Text style={{fontWeight: 'bold'}}> {getTimeDifferenceTwoString(latestETA,Date.now())} </Text>
                                 </View>
-                                <View style={styles.reminderContainer}>
-                                  <Text style={styles.headerSubText}>{'Remember to report when 72h left!'}</Text>
-                                </View>
+
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
                 {!loading && <ListView
                                 enableEmptySections
@@ -213,7 +216,9 @@ const styles = StyleSheet.create ({
     },
     dailyContainer: {
         backgroundColor: colorScheme.white,
-        padding: 15
+        padding: 15,
+        flex: 0.05,
+        flexDirection: 'row'
     },
     headerTitleText: {
         textAlign: 'center',
