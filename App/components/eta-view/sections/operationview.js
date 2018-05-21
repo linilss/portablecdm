@@ -170,7 +170,7 @@ class OperationView extends Component {
             onPress={this._toggleCollapsed}>
             <View>
               <View style={{flexDirection: 'row'}}>
-                {operation.atLocation && <Text style={styles.operationHeader}><Text style={{fontWeight: 'bold'}}></Text>{operation.atLocation.name}</Text>}
+                {operation.atLocation && <Text style={styles.operationHeader}><Text style={{fontWeight: 'bold'}}></Text></Text>}
                 {operation.warnings.length > 0 &&
                 <Icon name='warning' color={colorScheme.warningColor}/>
                 }

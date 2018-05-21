@@ -104,7 +104,7 @@ class TimeLineView extends Component {
         return(
             <View style={{flex: 1, backgroundColor: colorScheme.primaryContainerColor}}>
                 <TopHeader 
-                    title = 'Actuals Timeline' 
+                    title = 'Actuals' 
                     firstPage
                     navigation={this.props.navigation} 
                     rightIconFunction={this.goToStateList}

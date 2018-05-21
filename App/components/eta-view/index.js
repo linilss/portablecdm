@@ -144,9 +144,9 @@ class EtaView extends Component {
                                 animating={loading}
                                 size='large'/>}
                                 <View style={styles.dailyContainer}>
-                                  <Text style={styles.headerSubText}>{'Time until noon report: '}</Text>
+                                  <Text style={styles.headerSubText}>{'Until noon report: '}</Text>
                                   <Text style={{fontSize: 15,fontWeight: 'bold'}}> {getTimeDifferenceTwoString(Date.now(),lastReported)}</Text>
-                                  <Text style={styles.headerSubText}> {'      Time to arrival: '}</Text>
+                                  <Text style={styles.headerSubText}> {'      Until arrival: '}</Text>
                                   <Text style={{fontSize: 15,fontWeight: 'bold'}}> {getTimeDifferenceTwoString(Date.now(),latestETA)}</Text>
                                 </View>
 
