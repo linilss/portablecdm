@@ -284,7 +284,10 @@ class OperationView extends Component {
     return (
         <View key={stateToDisplay.messageId}>
         {allOfTheseStatements.map( stateToDisplay => {
-            return <ListItem
+            if (stateToDisplay.timeType != "ESTIMATED")
+              return null;
+            else
+              return <ListItem
                     containerStyle = {{
                       borderTopWidth: 0,
                       borderBottomWidth: 0,
