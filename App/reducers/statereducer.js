@@ -1,10 +1,11 @@
 import { ADD_FAVORITE_STATE, REMOVE_FAVORITE_STATE, REPLACE_FAVORITE_STATES } from '../actions/types';
 import { REHYDRATE } from 'redux-persist';
 import stateCatalogue from './state_catalogue.json';
+import favouriteDefaults from './favourite_defaults.json';
 
 const INITIAL_STATE = { 
   stateCatalogue: stateCatalogue,
-  favoriteStates: [],
+  favoriteStates: favouriteDefaults,
   stateById: function(id) {
     return this.stateCatalogue.find(stateDef => stateDef.StateId === id);
   },

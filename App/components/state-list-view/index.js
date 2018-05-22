@@ -40,7 +40,7 @@ class StateList extends Component {
         <TopHeader title={initNew ? 'Create port call' : 'Favorite States'}
           navigation={this.props.navigation}
           firstPage={initNew}
-          rightIconFunction={this.onAddStatesPress.bind(this)} 
+          rightIconFunction={this.onAddStatesPress.bind(this)}
         />
         <View style={styles.headerContainer} >
           <Text style={styles.headerSubText}>Select state</Text>
@@ -62,7 +62,7 @@ class StateList extends Component {
                     }}
                 />
               );
-            })} 
+            })}
           </List>
         </ScrollView>
       </View>

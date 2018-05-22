@@ -16,8 +16,7 @@ const store = compose(applyMiddleware(ReduxThunk))(createStore)(reducers);
 
 class App extends Component {
   constructor(props) {
-    super(props);
-
+    super(props);    
     this.state = {
       rehydrated: false,
     }

@@ -3,59 +3,58 @@ import { connect } from 'react-redux';
 import {
     View,
     StyleSheet,
-    FlatList,
-    TouchableWithoutFeedback,
     ListView,
     ScrollView,
     ActivityIndicator,
     RefreshControl,
     Alert,
-} from 'react-native'
+} from 'react-native';
 
-import { 
-    List, 
-    ListItem, 
-    Icon,
+import {
     Text
 } from 'react-native-elements';
 
 import TopHeader from '../top-header-view';
-import OperationView from './sections/operationview';
 
-import { 
-    fetchPortCallEvents, 
-    changeFetchReliability, 
-    removeError, 
+
+import {
+    fetchPortCallEvents,
+    changeFetchReliability,
+    removeError,
     toggleFavoritePortCall,
     toggleFavoriteVessel,
 } from '../../actions';
-import { getTimeDifferenceString } from '../../util/timeservices';
 import colorScheme from '../../config/colors';
+import { getTimeDifferenceTwoString } from '../../util/timeservices';
+import OperationView from './sections/operationview';
 
 const timer = null;
-const portCallId = null;
+let portCallId = null;
 
-class TimeLineView extends Component {
+class EtaView extends Component {
     constructor(props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        
+
         this.state = {
             dataSource: ds.cloneWithRows(['row 1, row 2']),
             refreshing: false,
             showExpiredStates: false,
-        }
+        };
 
-        this.goToStateList = this.goToStateList.bind(this);
+        //this.goToStateList = this.goToStateList.bind(this);
+        this.goToStateList = this;
     }
 
   componentWillMount() {
+
         portCallId = this.props.portCallId;
-        timer = setInterval(() => this.loadOperations, 60000);
+    //timer = setInterval(() => this.loadOperations, 60000);
 
         this.loadOperations = this.loadOperations.bind(this);
         if (!!portCallId)
-            this.loadOperations();
+          this.loadOperations();
+
     }
 
     loadOperations() {
@@ -76,10 +75,10 @@ class TimeLineView extends Component {
                         {cancelable: false},
                     );
                 } else {
-                    this.props.navigation.navigate('Error');                   
+                    this.props.navigation.navigate('Error');
                 }
             }
-        }); 
+        });
     }
 
     componentWillUnmount() {
@@ -87,47 +86,68 @@ class TimeLineView extends Component {
     }
 
     goToStateList = () => {
-        this.props.navigation.navigate('FavoriteStates');
+        this.props.navigation.navigate('EtaPopup');
+    }
+
+    goToStateList = () => {
+        this.props.navigation.navigate('FavoriteStates'); //LÄGG TILL FUNKTIONEN SOM PEKAR TILL K8 HÄR
     }
 
     render() {
         const { loading, operations, vesselName } = this.props;
-      const {params} = this.props.navigation.state;
-      let portName = "";
-      if(operations[0]) {
-        portName = operations[0].atLocation.name;
-      }
+        let lastReported = "";
+        let latestETA = "";
+
+        if(operations.length > 0 ) {
+          if(operations[0].reportedStates.hasOwnProperty('Arrival_Vessel_TrafficArea')){
+          lastReported = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].reportedAt);
+          lastReported.setDate(lastReported.getDate()+1);
+          latestETA = new Date(operations[0].reportedStates.Arrival_Vessel_TrafficArea[0].time);
+          }
+        }
+        let portName = "";
+
+        if(operations[0]){
+          portName = operations[0].atLocation.name;
+
+        }
+
         let { dataSource } = this.state;
 
         if(!loading) dataSource = dataSource.cloneWithRows(operations);
 
         return(
             <View style={{flex: 1, backgroundColor: colorScheme.primaryContainerColor}}>
-                <TopHeader 
-                    title = 'Timeline' 
+                <TopHeader
+                    title = 'ETA to VTS Area'
                     firstPage
-                    navigation={this.props.navigation} 
-                    rightIconFunction={this.goToStateList}
-                    leftIcons={this.createFavoriteIcons()}
-                    selectorIcon={this.createShowHideExpiredIcon()}/>
-                <View 
+                    navigation={this.props.navigation}
+                    />
+                <View
                     style={styles.headerContainer}
                 >
-                    <Text style={styles.headerText}>{ portName }</Text>
-                    {operations.reliability >= 0 && 
+                    <Text style={styles.headerText}>{portName}</Text>
+                    {operations.reliability >= 0 &&
                         <Text style={styles.headerTitleText}><Text style={{fontWeight: 'bold'}}>Reliability: </Text>{operations.reliability}%</Text>
                     }
                 </View>
 
-                {loading && <ActivityIndicator 
+                {loading && <ActivityIndicator
                                 color={colorScheme.primaryColor}
                                 style={{alignSelf: 'center'}}
                                 animating={loading}
                                 size='large'/>}
+                                <View style={styles.dailyContainer}>
+                                  <Text style={styles.headerSubText}>{'Until noon report: '}</Text>
+                                  <Text style={{fontSize: 15,fontWeight: 'bold'}}> {getTimeDifferenceTwoString(Date.now(),lastReported)}</Text>
+                                  <Text style={styles.headerSubText}> {'      Until arrival: '}</Text>
+                                  <Text style={{fontSize: 15,fontWeight: 'bold'}}> {getTimeDifferenceTwoString(Date.now(),latestETA)}</Text>
+                                </View>
+
             <ScrollView maximumZoomScale={10} alwaysBounceVertical={false}>
                 {!loading && <ListView
                                 enableEmptySections
-                                dataSource={dataSource} 
+                                dataSource={dataSource}
                                 refreshControl = {
                                     <RefreshControl
                                         refreshing={this.state.refreshing}
@@ -144,14 +164,24 @@ class TimeLineView extends Component {
                                             data.warnings.push({message: expiredMessage});
                                         }
                                     }
-                                    if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
-                                    return <OperationView 
-                                        operation={data}
-                                        rowNumber={rowId}
-                                        navigation={this.props.navigation}
-                                        vesselName={vesselName}
-                                        />
-                                    }                
+                                  if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
+
+
+                                  if(data.at == null) { return null; }
+                                  if(data.at.includes('traffic_area')) {
+                                      if(data.atLocation.locationType != 'TRAFFIC_AREA') { return null; }
+                                      return <OperationView
+                                          operation={data}
+                                          rowNumber={rowId}
+                                          navigation={this.props.navigation}
+                                          vesselName={vesselName}
+                                          />;
+                                    }
+                                    else {
+                                      return null;
+                                    }
+
+                                  }
                                 }
                             />
                 }
@@ -160,38 +190,7 @@ class TimeLineView extends Component {
         );
     }
 
-    createShowHideExpiredIcon() {
-        return {
-            name: this.state.showExpiredStates ? 'remove-red-eye' : 'visibility-off',
-            color: 'white',
-            onPress: () => this.setState({showExpiredStates: !this.state.showExpiredStates}),
-        };
-    }
-    
-    createFavoriteIcons() {
 
-        const { portCallId, imo } = this.props;
-
-        let showStar = this.props.favoritePortCalls.includes(portCallId);
-        let showBoat = this.props.favoriteVessels.includes(imo);
-
-        return {
-            first: {
-                name: 'star',
-                color: showStar ? 'gold' : 'gray',
-                onPress: () => {
-                    this.props.toggleFavoritePortCall(portCallId);
-                }
-            },
-            second: {
-                name: 'directions-boat',
-                color: showBoat ? 'lightblue' : 'gray',
-                onPress: () => {
-                    this.props.toggleFavoriteVessel(imo);
-                }
-            }
-        }
-    } 
 }
 
 
@@ -207,14 +206,30 @@ const styles = StyleSheet.create ({
         fontSize: 20,
         color: colorScheme.primaryTextColor,
     },
+    reminderContainer: {
+      backgroundColor: colorScheme.warningColor,
+      padding: 15
+    },
+    dailyContainer: {
+        backgroundColor: colorScheme.white,
+        padding: 15,
+        flex: 0.05,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        borderBottomWidth: 4,
+        borderBottomColor: '#3a6ea5',
+    },
     headerTitleText: {
         textAlign: 'center',
         color: colorScheme.secondaryContainerColor,
         fontSize: 12,
    },
+   headerSubText: {
+     textAlign: 'center',
+     color: colorScheme.black,
+     fontSize: 15,
+   },
 });
-
-
 
 function mapStateToProps(state) {
     return {
@@ -231,13 +246,9 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    changeFetchReliability, 
-    fetchPortCallEvents, 
+    changeFetchReliability,
+    fetchPortCallEvents,
     removeError,
     toggleFavoritePortCall,
     toggleFavoriteVessel,
-})(TimeLineView);
-
-
-
-
+})(EtaView);

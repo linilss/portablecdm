@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import {
     View,
     StyleSheet,
-    FlatList,
-    TouchableWithoutFeedback,
     ListView,
     ScrollView,
     ActivityIndicator,
@@ -12,10 +10,7 @@ import {
     Alert,
 } from 'react-native'
 
-import { 
-    List, 
-    ListItem, 
-    Icon,
+import {  
     Text
 } from 'react-native-elements';
 
@@ -29,11 +24,10 @@ import {
     toggleFavoritePortCall,
     toggleFavoriteVessel,
 } from '../../actions';
-import { getTimeDifferenceString } from '../../util/timeservices';
 import colorScheme from '../../config/colors';
 
-const timer = null;
-const portCallId = null;
+let timer = null;
+let portCallId = null;
 
 class TimeLineView extends Component {
     constructor(props) {
@@ -44,9 +38,8 @@ class TimeLineView extends Component {
             dataSource: ds.cloneWithRows(['row 1, row 2']),
             refreshing: false,
             showExpiredStates: false,
-        }
+        };
 
-        this.goToStateList = this.goToStateList.bind(this);
     }
 
   componentWillMount() {
@@ -92,7 +85,8 @@ class TimeLineView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-      const {params} = this.props.navigation.state;
+        
+      //const {params} = this.props.navigation.state;
       let portName = "";
       if(operations[0]) {
         portName = operations[0].atLocation.name;
@@ -104,7 +98,7 @@ class TimeLineView extends Component {
         return(
             <View style={{flex: 1, backgroundColor: colorScheme.primaryContainerColor}}>
                 <TopHeader 
-                    title = 'Timeline' 
+                    title = 'Actuals' 
                     firstPage
                     navigation={this.props.navigation} 
                     rightIconFunction={this.goToStateList}
@@ -140,17 +134,18 @@ class TimeLineView extends Component {
                                     }
                                     if (data.isExpired) {
                                         let expiredMessage = 'This event has expired.';
-                                        if (!data.warnings.some(w => w.message === expiredMessage)) {
+                                        if (!data.warnings.some((w) => w.message === expiredMessage)) {
                                             data.warnings.push({message: expiredMessage});
                                         }
                                     }
                                     if (typeof data == 'number') return null; // disgusting way to not handle operations.reliability as a member of the dataset for operations
+
                                     return <OperationView 
                                         operation={data}
                                         rowNumber={rowId}
                                         navigation={this.props.navigation}
                                         vesselName={vesselName}
-                                        />
+                                        />;
                                     }                
                                 }
                             />

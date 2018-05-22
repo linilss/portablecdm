@@ -18,10 +18,10 @@ import {
     Icon,
     Avatar,
 } from 'react-native-elements';
-
+import ships from '../../assets/ships';
 import colorScheme from '../../config/colors';
 import consts from '../../config/constants';
-import { changeUser, logoutKeycloak, initiatePortCall, } from '../../actions';
+import { changeUser, logoutKeycloak, initiatePortCall, fetchVesselFromIMO  } from '../../actions';
 
 class SideMenu extends Component {
 
@@ -30,9 +30,18 @@ class SideMenu extends Component {
 
     this._logout = this._logout.bind(this);
   }
+  async componentWillMount() {
+    if(this.props.favoriteVessels[0] != null) {
+      await this.props.fetchVesselFromIMO(this.props.favoriteVessels[0].split('IMO:')[1])
+                .then(res => console.log(res));
+    } else {
+      console.log("No favorite vessel");
+    }
+  }
+
 
   _logout() {
-      const { navigation, connection, changeUser, logoutKeycloak } = this.props;
+      const { navigation, connection, changeUser, logoutKeycloak, fetchVesselFromIMO } = this.props;
       if(!!connection.username) {
         changeUser('', '', false);
         console.log('Logging out legacy user...');
@@ -47,10 +56,14 @@ class SideMenu extends Component {
   render() {
 
     const { navigate, state } = this.props.navigation;
-    const { selectedPortCall, vessel, activeItemKey } = this.props;
+    const { selectedPortCall, activeItemKey } = this.props;
+    const vessel = this.props.extendedVessel ? this.props.extendedVessel : this.props.vessel;
 
-    const haveSelectedPortCall = !!selectedPortCall;
-    const containerStyle = haveSelectedPortCall ? styles.menuContainer : [styles.menuContainer, styles.unavailableContainer];
+    //console.log(this.props);
+    //const vessel2 = fetchVesselFromIMO(this.props.favoriteVessels[0].split(":").slice(-1)[0]);
+    //console.log(vessel2);
+      const haveSelectedPortCall = !!selectedPortCall;
+      const containerStyle = haveSelectedPortCall ? styles.menuContainer : [styles.menuContainer, styles.unavailableContainer];
     const textStyle = haveSelectedPortCall && activeItemKey !== 'Login' ? styles.menuText : [styles.menuText, styles.unavailableMenuText];
     const canBeAccessedEverywhereExceptOnLogin = activeItemKey === 'Login' ? [styles.menuText, styles.unavailableMenuText] : styles.menuText;
     return(
@@ -72,49 +85,120 @@ class SideMenu extends Component {
                 <Text style={styles.headerText}>Select a Portcall</Text>}
             </View>
 
-
-            <Divider style={{backgroundColor: colorScheme.secondaryContainerColor, height: 0.7,}}/>
-
             <View style={styles.listContainer}>
                 <List style={{paddingTop: 0, backgroundColor: colorScheme.sidebarColor}}>
                     {/* Menu */}
-                    <ListItem
-                        containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      <ListItem
+      containerStyle={activeItemKey === 'TimeLine' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      leftIcon={{
+        name:'timeline',
+        color: 'white'}}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={textStyle}>Port Call Timeline</Text>
+        </View>
+      }
+      onPress={() => {
+        if (haveSelectedPortCall && activeItemKey !== 'TimeLine')
+          navigate('TimeLine');
+      }}
+      />
+
+      <ListItem
+      containerStyle={activeItemKey === 'EtaView' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      leftIcon={{
+        name:'access-time',
+        color: 'white'}}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={textStyle}>Estimated Time of Arrival</Text>
+        </View>
+      }
+      onPress={() => {
+        if (haveSelectedPortCall && activeItemKey !== 'EtaView')
+          navigate('EtaView');
+      }}
+      />
+
+      <ListItem
+      containerStyle={activeItemKey === 'Berths' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      leftIcon={{
+        name: 'home',
+        color: 'white'
+      }}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Berth</Text>
+        </View>
+      }
+      onPress={() => {
+        if(activeItemKey !== 'Login') navigate('Berths');
+      }}
+      />
+
+      <ListItem
+      containerStyle={activeItemKey === 'FavoriteOverview' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+      leftIcon={{
+        name: 'favorite',
+        color: 'white'
+      }}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={canBeAccessedEverywhereExceptOnLogin}>Favorite Overview</Text>
+        </View>
+      }
+      onPress={() => {
+        if(activeItemKey !== 'Login') navigate('FavoriteOverview');
+      }}
+      />
+
+      <ListItem
+      containerStyle={activeItemKey === 'ActualsView' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      leftIcon={{
+        name:'book',
+        color: 'white'}}
+      hideChevron
+      underlayColor={colorScheme.secondaryColor}
+      title={
+        <View style={styles.textContainer}>
+        <Text style={textStyle}>Actuals Timeline</Text>
+        </View>
+      }
+        onPress={() => {
+            if (haveSelectedPortCall && activeItemKey !== 'ActualsView')
+                navigate('ActualsView');
+        }}
+        />
+
+      <ListItem
+      containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
                         leftIcon={{
-                          name:'home',
+                          name:'directions-boat',
                           color: 'white',
                           }}
                         hideChevron
                         underlayColor={colorScheme.secondaryColor}
                         title={
                             <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select PortCall</Text>
+                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Vessel</Text>
                             </View>
                         }
                         onPress={() => {
                             if(activeItemKey !== 'Login') navigate('PortCalls')}
                         }
-                    />
+      />
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'Berths' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
-                        leftIcon={{
-                            name: 'home',
-                            color: 'white'
-                        }}
-                        hideChevron
-                        underlayColor={colorScheme.secondaryColor}
-                        title={
-                            <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select Berth</Text>
-                            </View>
-                        }
-                        onPress={() => {
-                            if(activeItemKey !== 'Login') navigate('Berths');
-                        }}
-                    />
 
-                    {true &&<ListItem
+
+                       {true &&<ListItem
                         containerStyle={activeItemKey === 'FavoriteStatesSideMenu' /* TODO: Change color when selected */ ? [containerStyle, styles.selectedContainer] : containerStyle}
                           leftIcon={{
                           name: 'add',
@@ -139,46 +223,11 @@ class SideMenu extends Component {
                         }}
                     />}
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'FavoriteStatesSideMenu' ? [containerStyle, styles.selectedContainer] : containerStyle}
-                          leftIcon={{
-                          name: 'access-time',
-                          color: 'white'
-                        }}
-                        hideChevron
-                        underlayColor={colorScheme.secondaryColor}
-                        title={
-                            <View style={styles.textContainer}>
-                                <Text style={textStyle}>Report TimeStamp</Text>
-                            </View>
-                        }
-                        onPress={() => {
-                            if (haveSelectedPortCall && activeItemKey !== 'StateList')
-                                navigate('FavoriteStatesSideMenu');
-                        }}
-                    />
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'TimeLine' ? [containerStyle, styles.selectedContainer] : containerStyle}
+      <ListItem
+      containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
                         leftIcon={{
-                          name:'timeline',
-                          color: 'white'}}
-                        hideChevron
-                        underlayColor={colorScheme.secondaryColor}
-                        title={
-                            <View style={styles.textContainer}>
-                                <Text style={textStyle}>Port Call Timeline</Text>
-                            </View>
-                        }
-                        onPress={() => {
-                            if (haveSelectedPortCall && activeItemKey !== 'TimeLine')
-                                navigate('TimeLine');
-                        }}
-                    />
-                    <ListItem
-                        containerStyle={activeItemKey === 'VesselInfo' ? [containerStyle, styles.selectedContainer] : containerStyle}
-                        leftIcon={{
-                          name:'directions-boat',
+                          name:'info-outline',
                           color: 'white'}}
                         hideChevron
                         underlayColor={colorScheme.secondaryColor}
@@ -191,14 +240,21 @@ class SideMenu extends Component {
                             if (haveSelectedPortCall && activeItemKey !== 'VesselInfo')
                                 navigate('VesselInfo');
                         }}
-                    />
+      />
 
-                    <ListItem
-                        containerStyle={activeItemKey === 'Settings' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
-                        leftIcon={{
-                          name:'settings',
-                          color: 'white',
-                        }}
+      <ListItem
+      containerStyle={activeItemKey === 'Settings' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
+
+
+
+
+
+
+
+      leftIcon={{
+        name:'settings',
+        color: 'white',
+      }}
                         hideChevron
                         underlayColor={colorScheme.secondaryColor}
                         title={
@@ -214,7 +270,7 @@ class SideMenu extends Component {
 
                     <ListItem
                         containerStyle={activeItemKey === 'About' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
-                        leftIcon={{name:'info',
+                        leftIcon={{name:'help-outline',
                         color: 'white'
                         }}
                         hideChevron
@@ -312,10 +368,17 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        selectedPortCall: state.portCalls.selectedPortCall,
-        vessel: state.portCalls.vessel,
-        connection: state.settings.connection,
+      selectedPortCall: state.portCalls.selectedPortCall,
+      vessel: state.portCalls.vessel,
+      connection: state.settings.connection,
+      favoriteVessels: state.favorites.vessels,
+      extendedVessel: state.vessel.vessel,
     }
 }
 
-export default connect(mapStateToProps, {initiatePortCall, changeUser, logoutKeycloak})(SideMenu);
+export default connect(mapStateToProps, {
+  initiatePortCall,
+  changeUser,
+  logoutKeycloak,
+  fetchVesselFromIMO
+})(SideMenu);

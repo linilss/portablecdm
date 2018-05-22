@@ -6,9 +6,12 @@ import LoginView            from '../components/login-view';
 import SendPortCall         from '../components/send-portcall-view';
 import StateList            from '../components/state-list-view';
 import TimeLineView         from '../components/timeline-view';
+import EtaView              from '../components/eta-view';
 import PortCallList         from '../components/portcall-list-view';
+import FavoriteOverview     from '../components/favorite-overview';
 import FilterMenu           from '../components/portcall-list-view/sections/filterMenu';
 import StateDetails         from '../components/timeline-view/sections/statedetails';
+import EtaStateDetails      from '../components/eta-view/sections/statedetails';
 import VesselInfo           from '../components/vessel-info-view';
 import Settings             from '../components/settings-view';
 import LoginKeyCloakView    from '../components/loginkeycloak-view';
@@ -20,6 +23,9 @@ import ErrorView            from '../components/error-view';
 import BearthList           from '../components/berth-list-view';
 import BerthList            from '../components/berth-list-view';
 import BerthTimeLine        from '../components/berth-timeline-view';
+import EtaPopup             from '../components/eta-popup';
+import ActualsView          from '../components/actuals-view';
+
 
 const BerthViewNavigator = StackNavigator({
     BerthList: { screen: BearthList }, // THIS SHOULD BE FIRST!!
@@ -38,12 +44,36 @@ const TimeLineNavigator = StackNavigator({
   headerMode: 'none',
 });
 
+const OverviewNavigator = StackNavigator({
+  FavoriteOverview: {screen: FavoriteOverview},
+}, {
+  headerMode: 'none',
+});
+
+
 const PortCallListNavigator = StackNavigator({
   PortCallList: { screen: PortCallList},
   FilterMenu: {screen: FilterMenu},
 }, {
   headerMode: 'none',
 });
+
+
+const EtaNavigator = StackNavigator({
+  EtaView: {screen: EtaView},
+  EtaPopup: {screen: EtaPopup},
+  EtaStateDetails: { screen: EtaStateDetails },
+  SendPortCall: { screen: SendPortCall },
+}, {
+  headerMode: 'none',
+});
+
+const ActualsNavigator = StackNavigator({
+    ActualsView: {screen: ActualsView},
+}, {
+    headerMode: 'none',
+});
+
 
 const SettingsNavigator = StackNavigator({
   SettingsStart: { screen: Settings },
@@ -63,14 +93,18 @@ const InitiatePortCallNavigator = StackNavigator({
 
 const MainNavigator = DrawerNavigator({
     PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
-    Berths: { screen: BerthViewNavigator },
-    TimeLine: {screen: TimeLineNavigator},
-    FavoriteStatesSideMenu: { screen: StateList },
-    FavoriteStatesInit: { screen: InitiatePortCallNavigator },
-    VesselInfo: { screen: VesselInfo },
-    Settings: { screen: SettingsNavigator },
-    About: { screen: AboutView },
-    Error: { screen: ErrorView },
+    ActualsView: { screen: ActualsView },
+  FavoriteOverview: { screen: OverviewNavigator },
+  Berths: { screen: BerthViewNavigator },
+  TimeLine: {screen: TimeLineNavigator},
+  EtaView: { screen: EtaNavigator },
+  FavoriteStatesSideMenu: { screen: StateList },
+  FavoriteStatesInit: { screen: InitiatePortCallNavigator },
+  VesselInfo: { screen: VesselInfo },
+  Settings: { screen: SettingsNavigator },
+  About: { screen: AboutView },
+  Error: { screen: ErrorView },
+
 }, {
     headerMode: 'none',
     drawerWidth: 3*Dimensions.get('window').width/4,

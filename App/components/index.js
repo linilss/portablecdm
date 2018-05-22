@@ -50,6 +50,11 @@ class TimeLineView extends Component {
     }
 
   componentWillMount() {
+    /*
+    console.log("PROPSIIIIIIIIIIIIIIIIIIIII:");
+    console.log(this.props);
+    console.log("SLUT");
+    */
         portCallId = this.props.portCallId;
         timer = setInterval(() => this.loadOperations, 60000);
 
@@ -92,11 +97,7 @@ class TimeLineView extends Component {
 
     render() {
         const { loading, operations, vesselName } = this.props;
-      const {params} = this.props.navigation.state;
-      let portName = "";
-      if(operations[0]) {
-        portName = operations[0].atLocation.name;
-      }
+        const {params} = this.props.navigation.state;
         let { dataSource } = this.state;
 
         if(!loading) dataSource = dataSource.cloneWithRows(operations);
@@ -113,7 +114,7 @@ class TimeLineView extends Component {
                 <View 
                     style={styles.headerContainer}
                 >
-                    <Text style={styles.headerText}>{ portName }</Text>
+                    <Text style={styles.headerText}>{vesselName}</Text>
                     {operations.reliability >= 0 && 
                         <Text style={styles.headerTitleText}><Text style={{fontWeight: 'bold'}}>Reliability: </Text>{operations.reliability}%</Text>
                     }
