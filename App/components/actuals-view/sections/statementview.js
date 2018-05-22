@@ -43,7 +43,7 @@ class StatementView extends Component {
                 {text: 'No'},
                 {text: 'Yes', onPress: () => {
                     this.props.withdrawStatement(statement)
-                        .then(err => {
+                        .then((err) => {
                             if(err) {
                                 console.log(JSON.stringify(err));
                                 Alert.alert(
@@ -179,7 +179,7 @@ class StatementView extends Component {
 StatementView.propTypes = {
     statement: PropTypes.object.isRequired,
     stateDef: PropTypes.object,
-}
+};
 
             /*
             container

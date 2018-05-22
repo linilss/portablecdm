@@ -145,7 +145,7 @@ class TimeLineView extends Component {
                                         rowNumber={rowId}
                                         navigation={this.props.navigation}
                                         vesselName={vesselName}
-                                        />
+                                        />;
                                     }                
                                 }
                             />

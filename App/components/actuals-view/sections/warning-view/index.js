@@ -57,7 +57,7 @@ class WarningView extends Component {
             case WARNING_TYPES.MISSING_DATA:
                 return (
                     <MissingDataView warning={warning} addStatement={this.props.addStatement} onClose={this.props.onClose} formatStateId={this.formatStateId} />
-                )
+                );
             case WARNING_TYPES.MULTIPLE_VESSELS_AT_BERTH:
                 return (
                    <MultipleVesselsAtBerthView warning={warning} getVessel={this.getVessel} formatLocation={this.formatLocation} />
@@ -65,9 +65,9 @@ class WarningView extends Component {
             case WARNING_TYPES.MULTIPLE_ACTUALS:
                 return <MultipleActualsView operation={this.props.operation} warning={warning} /> 
             case WARNING_TYPES.VESSEL_AT_MULTIPLE_LOCATIONS:
-                return <MultipleLocationsView operation={this.props.operation} warning={warning} allLocations={this.props.allLocations} />
+                return <MultipleLocationsView operation={this.props.operation} warning={warning} allLocations={this.props.allLocations} />;
             case WARNING_TYPES.CONFLICTING_DATA:
-                return <ConflictingDataView operation={this.props.operation} warning={warning} />
+                return <ConflictingDataView operation={this.props.operation} warning={warning} />;
             default:
             return null;
         }

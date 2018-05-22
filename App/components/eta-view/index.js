@@ -8,7 +8,7 @@ import {
     ActivityIndicator,
     RefreshControl,
     Alert,
-} from 'react-native'
+} from 'react-native';
 
 import {
     Text
@@ -170,7 +170,7 @@ class EtaView extends Component {
                                           rowNumber={rowId}
                                           navigation={this.props.navigation}
                                           vesselName={vesselName}
-                                          />
+                                          />;
                                     }
                                     else {
                                       return null;
