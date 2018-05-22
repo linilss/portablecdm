@@ -170,7 +170,7 @@ class OperationView extends Component {
             onPress={this._toggleCollapsed}>
             <View>
               <View style={{flexDirection: 'row'}}>
-                {operation.atLocation && <Text style={styles.operationHeader}><Text style={{fontWeight: 'bold'}}></Text>{operation.atLocation.name}</Text>}
+                {operation.atLocation && <Text style={styles.operationHeader}><Text style={{fontWeight: 'bold'}}></Text></Text>}
                 {operation.warnings.length > 0 &&
                 <Icon name='warning' color={colorScheme.warningColor}/>
                 }
@@ -283,7 +283,10 @@ class OperationView extends Component {
     return (
         <View key={stateToDisplay.messageId}>
         {allOfTheseStatements.map( stateToDisplay => {
-            return <ListItem
+            if (stateToDisplay.timeType != "ESTIMATED")
+              return null;
+            else
+              return <ListItem
                     containerStyle = {{
                       borderTopWidth: 0,
                       borderBottomWidth: 0,
