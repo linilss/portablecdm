@@ -8,7 +8,7 @@ import {
     ActivityIndicator,
     RefreshControl,
     Alert,
-} from 'react-native'
+} from 'react-native';
 
 import {  
     Text
@@ -185,7 +185,7 @@ class TimeLineView extends Component {
                     this.props.toggleFavoriteVessel(imo);
                 }
             }
-        }
+        };
     } 
 }
 

@@ -20,7 +20,7 @@ import WarningView from './warning-view';
 import Collapsible from 'react-native-collapsible';
 
 
-import {getTimeDifferenceString, getTimeString, getDateString} from '../../../util/timeservices'
+import {getTimeDifferenceString, getTimeString, getDateString} from '../../../util/timeservices';
 import { cleanURN } from '../../../util/stringUtils';
 import colorScheme from '../../../config/colors';
 
@@ -53,7 +53,7 @@ class OperationView extends Component {
           timeContainer: undefined,
       },
       selectedWarning: undefined,
-    }
+    };
 
     this._toggleCollapsed = this._toggleCollapsed.bind(this);
     this.renderStateRow = this.renderStateRow.bind(this);
@@ -106,7 +106,7 @@ class OperationView extends Component {
     .sort((a,b) => a.time < b.time ? -1 : 1)[0];
 
     let lastStatement = Object.keys(reportedStates)
-    .map(stateDef => this.findMostRelevantStatement(reportedStates[stateDef]))
+    .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
     .sort((a, b) => a.time > b.time ? -1 : 1)[0];
 
 
@@ -205,8 +205,8 @@ class OperationView extends Component {
                 Object.keys(reportedStates)
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
                       .sort((a, b) => a.time < b.time ? -1 : 1)
-                      .filter(operation => {
-                          return operation.timeType === 'ACTUAL'
+                      .filter((operation) => {
+                          return operation.timeType === 'ACTUAL';
                        })
                       .map((mostRelevantStatement) => this.renderStateRow(operation, 
                                                         mostRelevantStatement, 
@@ -365,7 +365,7 @@ class OperationView extends Component {
       const formattedStatus = status.charAt(0) + status.substring(1).toLowerCase();
       return (
           <Text style={{color: (status === 'OK' ? 'green' : 'red')}}>{formattedStatus}</Text>
-      )
+      );
   }
 
   addStatement(stateDef, mostRelevantStatement) {
@@ -405,7 +405,7 @@ class OperationView extends Component {
           }
       }
 
-      let statementsCopy = [...statements]
+      let statementsCopy = [...statements];
       // if no actuals exist, sort again, this time for reliability
       statementsCopy.sort((a, b) => a.reliability - b.reliability);
       for(let j = 0; j < statementsCopy.length; j++) {

@@ -160,7 +160,7 @@ class EtaView extends Component {
                                     }
                                     if (data.isExpired) {
                                         let expiredMessage = 'This event has expired.';
-                                        if (!data.warnings.some(w => w.message === expiredMessage)) {
+                                        if (!data.warnings.some((w) => w.message === expiredMessage)) {
                                             data.warnings.push({message: expiredMessage});
                                         }
                                     }
