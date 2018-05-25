@@ -60,7 +60,7 @@ class EtaView extends Component {
     loadOperations() {
         this.props.fetchPortCallEvents(portCallId).then(() => {
             if(this.props.error.hasError) {
-                if(this.props.error.error.title == "RELIABILITY_FAIL") {
+                if(this.props.error.error.title === "RELIABILITY_FAIL") {
                     Alert.alert(
                         'Unable to fetch reliabilities!',
                         'It can easily be turned on or off in the settings. Would you like to turn it off now?',
@@ -169,7 +169,7 @@ class EtaView extends Component {
 
                                   if(data.at == null) { return null; }
                                   if(data.at.includes('traffic_area')) {
-                                      if(data.atLocation.locationType != 'TRAFFIC_AREA') { return null; }
+                                      if(data.atLocation.locationType !== 'TRAFFIC_AREA') { return null; }
                                       return <OperationView
                                           operation={data}
                                           rowNumber={rowId}

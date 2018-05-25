@@ -126,7 +126,7 @@ class OperationView extends Component {
     .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
     .sort((a, b) => a.time > b.time ? -1 : 1)
     .filter((mostRelevantStatement) => {
-        return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea');
+        return (mostRelevantStatement.stateDefinition === 'Arrival_Vessel_TrafficArea');
     })
     .slice(0,1);
     /* Väldigt ful kod! Finns flera "ställen" så stämmer inte detta då den utgår från att det bara finns en Operation View */
@@ -213,7 +213,7 @@ class OperationView extends Component {
                   .map((stateDef) => this.findMostRelevantStatement(reportedStates[stateDef]))
                   .sort((a, b) => a.time > b.time ? -1 : 1)
                   .filter((mostRelevantStatement) => {
-                      return (mostRelevantStatement.stateDefinition == 'Arrival_Vessel_TrafficArea')
+                      return (mostRelevantStatement.stateDefinition === 'Arrival_Vessel_TrafficArea')
                   })
                   .slice(0,1)
                   .map((mostRelevantStatement) => this.renderStateRow(operation,
@@ -283,7 +283,7 @@ class OperationView extends Component {
     return (
         <View key={stateToDisplay.messageId}>
         {allOfTheseStatements.map( stateToDisplay => {
-            if (stateToDisplay.timeType != "ESTIMATED")
+            if (stateToDisplay.timeType !== "ESTIMATED")
               return null;
             else
               return <ListItem

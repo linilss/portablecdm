@@ -262,10 +262,10 @@ class OperationView extends Component {
    // const stateCount = allOfTheseStatements.length;
     let stateCount = 0;
     if (stateToDisplay.timeType === 'ACTUAL') {
-      stateCount = allOfTheseStatements.filter((statement)=> statement.timeType === 'ACTUAL').length;
+      stateCount = allOfTheseStatements.filter((statement) => statement.timeType === 'ACTUAL').length;
     }
     else if (stateToDisplay.timeType === 'ESTIMATED') {
-      stateCount = allOfTheseStatements.filter((statement)=> statement.timeType === 'ESTIMATED').length;
+      stateCount = allOfTheseStatements.filter((statement) => statement.timeType === 'ESTIMATED').length;
     }
     else {
       stateCount = allOfTheseStatements.length;

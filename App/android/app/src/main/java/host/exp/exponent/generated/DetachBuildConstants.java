@@ -4,6 +4,6 @@ package host.exp.exponent.generated;
 public class DetachBuildConstants {
 
 
-    public static final String DEVELOPMENT_URL = "exp432e0186c47243658eeef37602b6c1c4://192.168.43.34:19000";
+    public static final String DEVELOPMENT_URL = "exp432e0186c47243658eeef37602b6c1c4://10.0.232.238:19000";
 
 }

@@ -54,7 +54,7 @@ class TimeLineView extends Component {
     loadOperations() {
         this.props.fetchPortCallEvents(portCallId).then(() => {
             if(this.props.error.hasError) {
-                if(this.props.error.error.title == "RELIABILITY_FAIL") {
+                if(this.props.error.error.title === "RELIABILITY_FAIL") {
                     Alert.alert(
                         'Unable to fetch reliabilities!',
                         'It can easily be turned on or off in the settings. Would you like to turn it off now?',
